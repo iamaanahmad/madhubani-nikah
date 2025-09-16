@@ -28,6 +28,7 @@ const links = [
   { href: '/stories', label: 'Success Stories', icon: Heart },
   { href: '/guidance', label: 'Islamic Guidance', icon: BookOpen },
   { href: '/about', label: 'About Us', icon: Info },
+  { href: '/help', label: 'Help', icon: LifeBuoy },
 ];
 
 export function AppSidebar() {
@@ -60,14 +61,6 @@ export function AppSidebar() {
       <Separator />
       <SidebarFooter>
         <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild tooltip="Help">
-              <a href="/help">
-                <LifeBuoy />
-                <span>Help</span>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
               <a href="/settings">

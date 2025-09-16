@@ -18,21 +18,44 @@ import {
   Moon,
   Settings,
   User,
+  Home,
+  Search,
+  Heart,
+  BookOpen,
+  Info,
 } from 'lucide-react';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Logo } from '@/components/shared/logo';
 import { currentUser } from '@/lib/data';
 import Link from 'next/link';
 
+const navLinks = [
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/search', label: 'Search Profiles', icon: Search },
+  { href: '/stories', label: 'Success Stories', icon: Heart },
+  { href: '/guidance', label: 'Islamic Guidance', icon: BookOpen },
+  { href: '/about', label: 'About Us', icon: Info },
+  { href: '/help', label: 'Help', icon: LifeBuoy },
+];
+
 export function AppHeader() {
-  const loggedIn = true; // Placeholder for auth state
+  const loggedIn = false; // Placeholder for auth state
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-8">
       <SidebarTrigger className="md:hidden" />
-      <div className="hidden md:block">
-        <Logo />
+      <div className="flex items-center gap-6">
+        <div className="hidden md:block">
+          <Logo />
+        </div>
       </div>
+      <nav className="hidden md:flex items-center gap-4 text-sm font-medium">
+        {navLinks.map(link => (
+            <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+            </Link>
+        ))}
+      </nav>
       <div className="flex w-full items-center justify-end gap-2 md:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
