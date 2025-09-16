@@ -7,22 +7,19 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
 import { Loader2, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { explainMatch } from '@/ai/flows/smart-match-explanation';
 import { currentUser } from '@/lib/data';
 import type { UserProfile } from '@/lib/types';
+import { DropdownMenuItem } from '../ui/dropdown-menu';
 
 interface SmartMatchExplainerProps {
   matchProfile: UserProfile;
-  children: React.ReactNode;
 }
 
 export function SmartMatchExplainer({
   matchProfile,
-  children,
 }: SmartMatchExplainerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [explanation, setExplanation] = React.useState('');
@@ -55,7 +52,14 @@ export function SmartMatchExplainer({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DropdownMenuItem
+        onSelect={(e) => {
+          e.preventDefault();
+          setIsOpen(true);
+        }}
+      >
+        <Sparkles className="mr-2" /> Why this match?
+      </DropdownMenuItem>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 font-headline text-2xl">

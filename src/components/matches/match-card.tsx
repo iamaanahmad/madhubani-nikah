@@ -67,11 +67,7 @@ export function MatchCard({ profile }: MatchCardProps) {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <SmartMatchExplainer matchProfile={profile}>
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                  <Sparkles className="mr-2" /> Why this match?
-                </DropdownMenuItem>
-              </SmartMatchExplainer>
+              <SmartMatchExplainer matchProfile={profile} />
               <DropdownMenuItem>
                 <ShieldAlert className="mr-2" /> Report
               </DropdownMenuItem>
