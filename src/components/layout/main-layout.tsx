@@ -5,9 +5,21 @@ import { SidebarProvider, Sidebar, SidebarInset } from '@/components/ui/sidebar'
 import { AppSidebar } from '@/components/layout/sidebar';
 import { AppHeader } from '@/components/layout/header';
 import { OnboardingModal } from '@/components/shared/onboarding-modal';
+import { usePathname } from 'next/navigation';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  if (isHomePage) {
+    return (
+      <>
+        {children}
+        <OnboardingModal />
+      </>
+    );
+  }
 
   return (
     <SidebarProvider open={open} onOpenChange={setOpen}>

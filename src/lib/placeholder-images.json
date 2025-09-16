@@ -65,6 +65,12 @@
       "description": "Illustration showing a guardian figure approving a match proposal.",
       "imageUrl": "https://picsum.photos/seed/ob4/600/400",
       "imageHint": "family approval"
+    },
+    {
+      "id": "hero",
+      "description": "A South Asian couple holding hands at their wedding.",
+      "imageUrl": "https://picsum.photos/seed/hero/1600/900",
+      "imageHint": "wedding couple"
     }
   ]
 }

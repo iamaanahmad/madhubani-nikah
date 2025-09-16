@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import MainLayout from '@/components/layout/main-layout';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 export const metadata: Metadata = {
   title: 'Madhubani Nikah',
-  description: 'A matrimony app for the Madhubani region.',
+  description: 'Trusted Islamic Matrimony for Madhubani',
 };
 
 export default function RootLayout({
@@ -24,7 +25,9 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <MainLayout>{children}</MainLayout>
+        <TooltipProvider>
+          <MainLayout>{children}</MainLayout>
+        </TooltipProvider>
         <Toaster />
       </body>
     </html>

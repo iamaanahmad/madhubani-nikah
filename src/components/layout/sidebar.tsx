@@ -10,10 +10,12 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import {
-  LayoutGrid,
+  Home,
+  Search,
   Heart,
-  MessagesSquare,
-  User,
+  BookOpen,
+  Info,
+  LifeBuoy,
   Settings,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
@@ -21,10 +23,11 @@ import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
 
 const links = [
-  { href: '/', label: 'Dashboard', icon: LayoutGrid },
-  { href: '/matches', label: 'Matches', icon: Heart },
-  { href: '/messages', label: 'Messages', icon: MessagesSquare },
-  { href: '/profile', label: 'Profile', icon: User },
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/search', label: 'Search Profiles', icon: Search },
+  { href: '/stories', label: 'Success Stories', icon: Heart },
+  { href: '/guidance', label: 'Islamic Guidance', icon: BookOpen },
+  { href: '/about', label: 'About Us', icon: Info },
 ];
 
 export function AppSidebar() {
@@ -57,6 +60,14 @@ export function AppSidebar() {
       <Separator />
       <SidebarFooter>
         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Help">
+              <a href="/help">
+                <LifeBuoy />
+                <span>Help</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
               <a href="/settings">
