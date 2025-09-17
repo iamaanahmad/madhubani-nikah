@@ -12,29 +12,30 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
-  if (isHomePage) {
-    return (
-      <>
-        {children}
-        <OnboardingModal />
-      </>
-    );
-  }
-
   return (
     <SidebarProvider open={open} onOpenChange={setOpen}>
-      <Sidebar
-        variant="sidebar"
-        collapsible="icon"
-        className="group-data-[variant=sidebar]:bg-sidebar"
-      >
-        <AppSidebar />
-      </Sidebar>
-      <SidebarInset className="bg-background min-h-screen">
-        <AppHeader />
-        {children}
-      </SidebarInset>
-      <OnboardingModal />
+      {isHomePage ? (
+        <>
+          <AppHeader />
+          {children}
+          <OnboardingModal />
+        </>
+      ) : (
+        <>
+          <Sidebar
+            variant="sidebar"
+            collapsible="icon"
+            className="group-data-[variant=sidebar]:bg-sidebar"
+          >
+            <AppSidebar />
+          </Sidebar>
+          <SidebarInset className="bg-background min-h-screen">
+            <AppHeader />
+            {children}
+          </SidebarInset>
+          <OnboardingModal />
+        </>
+      )}
     </SidebarProvider>
   );
 }
