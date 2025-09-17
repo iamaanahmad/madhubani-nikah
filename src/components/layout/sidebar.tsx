@@ -10,26 +10,12 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar';
 import {
-  Home,
-  Search,
-  Heart,
-  BookOpen,
-  Info,
-  LifeBuoy,
   Settings,
 } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
-
-const links = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/search', label: 'Search Profiles', icon: Search },
-  { href: '/stories', label: 'Success Stories', icon: Heart },
-  { href: '/guidance', label: 'Islamic Guidance', icon: BookOpen },
-  { href: '/about', label: 'About Us', icon: Info },
-  { href: '/help', label: 'Help', icon: LifeBuoy },
-];
+import { navLinks } from './nav-links';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -42,7 +28,7 @@ export function AppSidebar() {
       <Separator />
       <SidebarContent>
         <SidebarMenu>
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <SidebarMenuItem key={link.href}>
               <SidebarMenuButton
                 asChild
