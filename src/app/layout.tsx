@@ -7,6 +7,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 export const metadata: Metadata = {
   title: 'Madhubani Nikah',
   description: 'Trusted Islamic Matrimony for Madhubani',
+  manifest: '/manifest.json',
 };
 
 export default function RootLayout({
