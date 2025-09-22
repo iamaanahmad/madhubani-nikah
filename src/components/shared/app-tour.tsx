@@ -1,44 +1,47 @@
 'use client';
 import * as React from 'react';
 import Joyride, { Step, CallBackProps } from 'react-joyride';
-
-const tourSteps: Step[] = [
-    {
-        target: 'body',
-        content: 'Welcome to Madhubani Nikah! Let\'s take a quick tour of the platform.',
-        placement: 'center',
-        title: 'Welcome!',
-    },
-    {
-        target: '#create-profile-button',
-        content: 'Click here to create your free profile and start your search for a life partner.',
-        title: 'Create Your Profile',
-    },
-    {
-        target: '#browse-profiles-button',
-        content: 'Or, you can start by browsing profiles from our community right away.',
-        title: 'Browse Profiles',
-    },
-    {
-        target: '#nearby-profiles-section',
-        content: 'Get a glimpse of profiles from your local area right here on the homepage.',
-        title: 'Discover Nearby Profiles',
-    },
-    {
-        target: '#language-switcher',
-        content: 'You can switch the language between English, Hindi, and Urdu to use the site comfortably.',
-        title: 'Switch Language',
-    }
-];
+import { useTranslations } from 'next-intl';
 
 export function AppTour() {
+  const t = useTranslations('AppTour');
   const [run, setRun] = React.useState(false);
-  const [stepIndex, setStepIndex] = React.useState(0);
+  
+  const tourSteps: Step[] = [
+    {
+      target: 'body',
+      content: t('step1_content'),
+      placement: 'center',
+      title: t('step1_title'),
+    },
+    {
+      target: '#create-profile-button',
+      content: t('step2_content'),
+      title: t('step2_title'),
+    },
+    {
+      target: '#browse-profiles-button',
+      content: t('step3_content'),
+      title: t('step3_title'),
+    },
+    {
+      target: '#nearby-profiles-section',
+      content: t('step4_content'),
+      title: t('step4_title'),
+    },
+    {
+      target: '#language-switcher',
+      content: t('step5_content'),
+      title: t('step5_title'),
+    }
+  ];
+
 
   React.useEffect(() => {
     const hasOnboarded = localStorage.getItem('madhubani_nikah_onboarded_tour');
     if (!hasOnboarded) {
-      setRun(true);
+      // Use a timeout to ensure the DOM is ready
+      setTimeout(() => setRun(true), 1000);
     }
   }, []);
 
@@ -56,7 +59,6 @@ export function AppTour() {
     <Joyride
       run={run}
       steps={tourSteps}
-      stepIndex={stepIndex}
       continuous
       showProgress
       showSkipButton
@@ -65,24 +67,45 @@ export function AppTour() {
         options: {
           primaryColor: 'hsl(var(--primary))',
           textColor: 'hsl(var(--foreground))',
-          arrowColor: 'hsl(var(--background))',
-          backgroundColor: 'hsl(var(--background))',
+          arrowColor: 'hsl(var(--card))',
+          backgroundColor: 'hsl(var(--card))',
           zIndex: 1000,
         },
-        buttonClose: {
-            display: 'none',
+        spotlight: {
+          borderRadius: 'var(--radius)',
+        },
+        tooltip: {
+          borderRadius: 'var(--radius)',
+          padding: '1rem'
+        },
+        tooltipTitle: {
+          fontFamily: 'var(--font-headline)',
+          fontSize: '1.5rem',
+          fontWeight: 700,
+        },
+        tooltipContent: {
+          fontFamily: 'var(--font-body)',
+          fontSize: '1rem',
+          paddingTop: '1rem',
         },
         buttonNext: {
             backgroundColor: 'hsl(var(--primary))',
             color: 'hsl(var(--primary-foreground))',
             borderRadius: 'var(--radius)',
+            padding: '0.75rem 1.5rem',
+            fontSize: '0.875rem'
         },
         buttonBack: {
             color: 'hsl(var(--foreground))',
+            padding: '0.75rem 1.5rem',
         },
         buttonSkip: {
-            color: 'hsl(var(--muted-foreground))'
-        }
+            color: 'hsl(var(--muted-foreground))',
+            fontSize: '0.875rem'
+        },
+        buttonClose: {
+            display: 'none',
+        },
       }}
     />
   );

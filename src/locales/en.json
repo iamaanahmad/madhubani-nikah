@@ -23,5 +23,17 @@
   "Buttons": {
     "createAccount": "Create Account",
     "login": "Login"
+  },
+  "AppTour": {
+    "step1_title": "Welcome!",
+    "step1_content": "Welcome to Madhubani Nikah! Let's take a quick tour of the platform.",
+    "step2_title": "Create Your Profile",
+    "step2_content": "Click here to create your free profile and start your search for a life partner.",
+    "step3_title": "Browse Profiles",
+    "step3_content": "Or, you can start by browsing profiles from our community right away.",
+    "step4_title": "Discover Nearby Profiles",
+    "step4_content": "Get a glimpse of profiles from your local area right here on the homepage.",
+    "step5_title": "Switch Language",
+    "step5_content": "You can switch the language between English, Hindi, and Urdu to use the site comfortably."
   }
 }
