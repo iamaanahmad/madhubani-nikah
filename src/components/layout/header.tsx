@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -121,9 +122,11 @@ export function AppHeader() {
                     <span>Get Verified</span>
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings className="mr-2" />
-                <span>Settings</span>
+              <DropdownMenuItem asChild>
+                <Link href="/settings">
+                    <Settings className="mr-2" />
+                    <span>Settings</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>

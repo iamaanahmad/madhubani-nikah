@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -17,6 +18,7 @@ import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
 import { navLinks } from './nav-links';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 export function AppSidebar() {
   const pathname = usePathname();
@@ -37,10 +39,10 @@ export function AppSidebar() {
                 isActive={pathname.endsWith(link.href)}
                 tooltip={t(link.label as any)}
               >
-                <a href={link.href} className="text-base h-11">
+                <Link href={link.href} className="text-base h-11">
                   <link.icon />
                   <span>{t(link.label as any)}</span>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           ))}
@@ -51,10 +53,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
-              <a href="/settings" className="text-base h-11">
+              <Link href="/settings" className="text-base h-11">
                 <Settings />
                 <span>Settings</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
