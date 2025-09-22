@@ -35,7 +35,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-              <Link href="/login">Create Profile</Link>
+              <Link href="/register">Create Profile</Link>
             </Button>
             <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10" asChild>
                <Link href="/browse">Browse Profiles</Link>

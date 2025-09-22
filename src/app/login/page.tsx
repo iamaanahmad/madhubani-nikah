@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { LogIn } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
@@ -18,10 +19,10 @@ export default function LoginPage() {
         <CardHeader className="text-center">
           <CardTitle className="flex items-center justify-center gap-2 font-headline text-3xl">
             <LogIn className="h-8 w-8" />
-            Login or Create Account
+            Login to Your Account
           </CardTitle>
           <CardDescription>
-            Join our community to find your perfect match.
+            Welcome back! Please enter your details.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -61,8 +62,8 @@ export default function LoginPage() {
           </Tabs>
           <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{' '}
-            <Button variant="link" className="p-0">
-              Sign up
+            <Button variant="link" className="p-0" asChild>
+              <Link href="/register">Sign up</Link>
             </Button>
           </div>
         </CardContent>
