@@ -22,7 +22,7 @@ export function GuidanceVideosCarousel() {
         {marriageGuidanceVideos.map((video) => (
           <CarouselItem
             key={video.id}
-            className="basis-full md:basis-1/2 lg:basis-1/3"
+            className="basis-[90%] md:basis-1/2 lg:basis-1/3"
           >
             <div className="p-1">
               <Card>

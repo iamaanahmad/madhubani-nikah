@@ -40,7 +40,7 @@ export default function Home() {
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild id="create-profile-button">
                 <Link href="/register">{t('createProfile')}</Link>
               </Button>
-              <Button size="lg" variant="secondary" className="bg-white/90 text-secondary-foreground hover:bg-white" asChild id="browse-profiles-button">
+              <Button size="lg" variant="secondary" className="bg-secondary/90 text-secondary-foreground hover:bg-secondary/100 md:bg-white/90 md:hover:bg-white" asChild id="browse-profiles-button">
                  <Link href="/profiles">{t('browseProfiles')}</Link>
               </Button>
             </div>

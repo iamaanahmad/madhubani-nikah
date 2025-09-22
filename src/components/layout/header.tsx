@@ -47,7 +47,7 @@ export function AppHeader() {
 
   return (
     <header className="sticky top-0 z-50 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-8">
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-2 md:gap-6">
         <SidebarTrigger className="md:hidden" />
         <Logo />
       </div>
@@ -58,7 +58,7 @@ export function AppHeader() {
             </Link>
         ))}
       </nav>
-      <div className="flex items-center justify-end gap-2 md:gap-4">
+      <div className="flex flex-1 items-center justify-end gap-2 md:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon" id="language-switcher">
