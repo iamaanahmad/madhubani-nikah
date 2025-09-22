@@ -29,7 +29,7 @@ export default function Home() {
             className="object-cover"
           />
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
+          <div className="relative z-50 flex flex-col items-center justify-center h-full text-center p-4">
             <h1 className="font-headline text-4xl md:text-6xl font-bold">
               {t('heroTitle')}
             </h1>

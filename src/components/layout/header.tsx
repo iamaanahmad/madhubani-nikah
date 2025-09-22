@@ -29,7 +29,8 @@ import { useLocale, useTranslations } from 'next-intl';
 
 export function AppHeader() {
   const t = useTranslations('Header');
-  const loggedIn = true; // Placeholder for auth state
+  // TODO: Replace with real auth state
+  const loggedIn = true;
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -58,7 +59,7 @@ export function AppHeader() {
             </Link>
         ))}
       </nav>
-      <div className="flex flex-1 items-center justify-end gap-2 md:gap-4">
+      <div className="flex items-center justify-end gap-2">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon" id="language-switcher">

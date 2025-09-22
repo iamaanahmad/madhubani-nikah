@@ -7,8 +7,8 @@ type MatchListProps = {
 };
 
 export function MatchList({ preview = false }: MatchListProps) {
-  // In a real app, you'd fetch this and get the loggedIn state from auth
-  const isLoggedIn = false;
+  // TODO: Replace with real auth state
+  const isLoggedIn = true; 
   const matchesToShow = preview ? mockMatches.slice(0, 4) : mockMatches.slice(0, 10);
 
   return (

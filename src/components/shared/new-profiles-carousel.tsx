@@ -10,9 +10,9 @@ import { mockMatches } from '@/lib/data';
 import { MatchCard } from '../matches/match-card';
 
 export function NewProfilesCarousel() {
-  const newMatches = mockMatches.slice(0, 6);
-  // In a real app, you'd get the loggedIn state from auth
-  const isLoggedIn = false;
+  const newMatches = mockMatches.slice(0, 8);
+  // TODO: Replace with real auth state from a context
+  const isLoggedIn = true;
   return (
     <Carousel
       opts={{
@@ -21,11 +21,11 @@ export function NewProfilesCarousel() {
       }}
       className="w-full"
     >
-      <CarouselContent>
+      <CarouselContent className="-ml-2">
         {newMatches.map((match) => (
           <CarouselItem
             key={match.id}
-            className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
+            className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-2"
           >
             <div className="p-1">
               <MatchCard

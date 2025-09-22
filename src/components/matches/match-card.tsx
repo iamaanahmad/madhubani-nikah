@@ -51,32 +51,33 @@ export function MatchCard({
   isLoggedIn = false,
 }: MatchCardProps) {
   const showPhoto = isLoggedIn && !profile.isPhotoBlurred;
-  const profileLink = `/profile/${profile.id}`;
+  const profileLink = `/profile/${profile.id.replace('user-', '')}`;
 
   const cardContent = (
     <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
       <CardHeader className="relative p-0">
-        <div className="aspect-square w-full bg-muted flex items-center justify-center">
-          {showPhoto ? (
-            <Image
-              src={profile.profilePicture.url}
-              alt={profile.name}
-              width={400}
-              height={400}
-              data-ai-hint={profile.profilePicture.hint}
-              className="aspect-square w-full object-cover"
-            />
-          ) : (
-            <div className="flex flex-col items-center text-muted-foreground">
-              <EyeOff className="h-12 w-12" />
-              <span className="text-sm mt-2">
-                {isLoggedIn ? 'Photo is private' : 'Login to view'}
-              </span>
-            </div>
-          )}
-        </div>
-        <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
-          <CardTitle className="flex items-center gap-2 font-headline text-2xl text-white">
+        <Link href={profileLink} className="block aspect-square w-full">
+          <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden">
+            {showPhoto ? (
+              <Image
+                src={profile.profilePicture.url}
+                alt={profile.name}
+                fill
+                data-ai-hint={profile.profilePicture.hint}
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex flex-col items-center text-muted-foreground text-center p-2">
+                <EyeOff className="h-10 w-10" />
+                <span className="text-xs mt-2">
+                  {isLoggedIn ? 'Photo is private' : 'Login to view photo'}
+                </span>
+              </div>
+            )}
+          </div>
+        </Link>
+        <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
+           <CardTitle className="flex items-center gap-2 font-headline text-2xl">
             <span>
               {profile.name}, {profile.age}
             </span>
@@ -134,33 +135,40 @@ export function MatchCard({
           </Button>
         </CardFooter>
       )}
+      {!isLoggedIn && !preview && (
+         <CardFooter className="flex bg-muted/50 p-4">
+            <AlertDialog>
+                <AlertDialogTrigger asChild>
+                    <Button variant="outline" className="w-full">View Profile</Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                    <AlertDialogTitle>Create a free account to view details</AlertDialogTitle>
+                    <AlertDialogDescription>
+                        To protect our members' privacy, you need to create an account to
+                        view full profiles and photos. It's completely free.
+                    </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                        <Link href="/login">Login or Sign Up</Link>
+                    </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+         </CardFooter>
+      )}
     </Card>
   );
 
-  if (isLoggedIn || preview) {
-    return cardContent;
+  if (preview) {
+     return (
+       <Link href={isLoggedIn ? profileLink : '/login'} className="block h-full">
+         {cardContent}
+       </Link>
+     )
   }
 
-  return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <div className="cursor-pointer">{cardContent}</div>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>Create a free account to view details</AlertDialogTitle>
-          <AlertDialogDescription>
-            To protect our members' privacy, you need to create an account to
-            view full profiles and photos. It's completely free.
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction asChild>
-            <Link href="/login">Login or Sign Up</Link>
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
+  return cardContent;
 }

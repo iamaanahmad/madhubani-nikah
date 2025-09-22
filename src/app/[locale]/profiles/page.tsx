@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Users } from 'lucide-react';
 import MainLayout from '@/components/layout/main-layout';
 
-export default function BrowsePage() {
+export default function ProfilesPage() {
   return (
     <MainLayout>
       <div className="container mx-auto p-4 md:p-8">

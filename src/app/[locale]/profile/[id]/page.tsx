@@ -50,14 +50,13 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
           <div className="lg:col-span-1 space-y-6">
             <Card>
               <CardHeader className="p-0">
-                <div className="aspect-square w-full bg-muted">
+                <div className="aspect-square w-full relative bg-muted rounded-t-lg">
                   {showPhoto && (
                     <Image
                       src={profile.profilePicture.url}
                       alt={profile.name}
-                      width={600}
-                      height={600}
-                      className="object-cover w-full h-full rounded-t-lg"
+                      fill
+                      className="object-cover"
                       data-ai-hint={profile.profilePicture.hint}
                     />
                   )}
@@ -108,7 +107,7 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
                   <BookText className="h-6 w-6 text-primary" />
                   Education & Occupation
                 </CardTitle>
-              </CardHeader>
+              </Header>
               <CardContent className="space-y-4">
                 <div>
                   <h4 className="font-semibold">Education</h4>
