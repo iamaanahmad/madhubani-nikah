@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { NextIntlClientProvider, useMessages } from 'next-intl';
 import { cn } from '@/lib/utils';
+import { ThemeProvider } from '@/components/shared/theme-provider';
 
 export const metadata: Metadata = {
   title: 'Madhubani Nikah',
@@ -31,12 +32,19 @@ export default function LocaleLayout({
         />
       </head>
       <body className={cn('font-body antialiased', locale === 'ur' && 'font-urdu')}>
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <TooltipProvider>
-            {children}
-          </TooltipProvider>
-          <Toaster />
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <NextIntlClientProvider locale={locale} messages={messages}>
+            <TooltipProvider>
+              {children}
+            </TooltipProvider>
+            <Toaster />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
