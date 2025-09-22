@@ -1,0 +1,27 @@
+
+{
+  "Header": {
+    "home": "होम",
+    "browseProfiles": "प्रोफ़ाइल देखें",
+    "search": "खोजें",
+    "successStories": "सफलता की कहानियाँ",
+    "islamicGuidance": "इस्लामी मार्गदर्शन",
+    "aboutUs": "हमारे बारे में",
+    "help": "मदद",
+    "login": "लॉग इन करें",
+    "language": "भाषा"
+  },
+  "HomePage": {
+    "heroTitle": "अपना जीवन साथी खोजें - इस्लामी तरीके से",
+    "heroSubtitle": "मधुबनी के मुस्लिम समुदाय के लिए एक मुफ़्त मंच। गोपनीयता और इस्लामी मूल्यों पर ध्यान देने के साथ।",
+    "createProfile": "प्रोफ़ाइल बनाएं",
+    "browseProfiles": "प्रोफ़ाइल ब्राउज़ करें",
+    "nearbyProfiles": "आस-पास के प्रोफ़ाइल",
+    "nearbyProfilesSubtitle": "अपने क्षेत्र के प्रोफ़ाइल की एक झलक पाएं।",
+    "seeAllProfiles": "सभी प्रोफ़ाइल देखने के लिए रजिस्टर करें"
+  },
+  "Buttons": {
+    "createAccount": "नया अकाउंट बनाएं",
+    "login": "लॉग इन करें"
+  }
+}

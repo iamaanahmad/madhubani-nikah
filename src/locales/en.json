@@ -1,0 +1,27 @@
+
+{
+  "Header": {
+    "home": "Home",
+    "browseProfiles": "Browse Profiles",
+    "search": "Search",
+    "successStories": "Success Stories",
+    "islamicGuidance": "Islamic Guidance",
+    "aboutUs": "About Us",
+    "help": "Help",
+    "login": "Login",
+    "language": "Language"
+  },
+  "HomePage": {
+    "heroTitle": "Find Your Life Partner - The Islamic Way",
+    "heroSubtitle": "A FREE platform for the Muslim community of Madhubani. With a focus on privacy and Islamic values.",
+    "createProfile": "Create Profile",
+    "browseProfiles": "Browse Profiles",
+    "nearbyProfiles": "Nearby Profiles",
+    "nearbyProfilesSubtitle": "Get a glimpse of profiles from your area.",
+    "seeAllProfiles": "Register to see all profiles"
+  },
+  "Buttons": {
+    "createAccount": "Create Account",
+    "login": "Login"
+  }
+}

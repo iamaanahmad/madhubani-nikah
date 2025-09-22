@@ -1,0 +1,27 @@
+
+{
+  "Header": {
+    "home": "ہوم",
+    "browseProfiles": "پروفائل دیکھیں",
+    "search": "تلاش کریں",
+    "successStories": "کامیابی کی کہانیاں",
+    "islamicGuidance": "اسلامی رہنمائی",
+    "aboutUs": "ہمارے بارے میں",
+    "help": "مدد",
+    "login": "لاگ ان کریں",
+    "language": "زبان"
+  },
+  "HomePage": {
+    "heroTitle": "اپنا جیون ساتھی تلاش کریں - اسلامی طریقے سے",
+    "heroSubtitle": "مدھوبنی کی مسلم برادری کے لیے ایک مفت پلیٹ فارم۔ رازداری اور اسلامی اقدار پر توجہ کے ساتھ۔",
+    "createProfile": "پروفائل بنائیں",
+    "browseProfiles": "پروفائل براؤز کریں",
+    "nearbyProfiles": "قریبی پروفائلز",
+    "nearbyProfilesSubtitle": "اپنے علاقے کے پروفائلز کی ایک جھلک حاصل کریں۔",
+    "seeAllProfiles": "تمام پروفائلز دیکھنے کے لیے رجسٹر کریں۔"
+  },
+  "Buttons": {
+    "createAccount": "نیا اکاؤنٹ بنائیں",
+    "login": "لاگ ان کریں"
+  }
+}
