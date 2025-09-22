@@ -23,9 +23,20 @@ import { Logo } from '@/components/shared/logo';
 import { currentUser } from '@/lib/data';
 import Link from 'next/link';
 import { navLinks } from './nav-links';
+import { usePathname, useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 export function AppHeader() {
   const loggedIn = false; // Placeholder for auth state
+  const pathname = usePathname();
+  const router = useRouter();
+  const locale = useLocale();
+
+  const handleLanguageChange = (newLocale: string) => {
+    // This will replace the locale in the path and reload the page.
+    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
+    router.replace(newPath);
+  };
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-8">
@@ -49,9 +60,9 @@ export function AppHeader() {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem>English</DropdownMenuItem>
-            <DropdownMenuItem>हिंदी</DropdownMenuItem>
-            <DropdownMenuItem>اردو</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleLanguageChange('en')}>English</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleLanguageChange('hi')}>हिंदी</DropdownMenuItem>
+            <DropdownMenuItem onSelect={() => handleLanguageChange('ur')}>اردو</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
         
