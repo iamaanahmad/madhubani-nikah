@@ -32,13 +32,19 @@ A single database will contain all the collections for the application.
 
 ### c. Storage Service
 
-Appwrite Storage will be used to store user-uploaded files, primarily profile pictures.
+Appwrite Storage will be used to store user-uploaded files.
 
-- **Bucket Name**: `Profile Pictures`
-- **Bucket ID**: `profile_pictures`
-- **Permissions**:
-    - Read: Any user (to view profile pictures).
-    - Write: Only the logged-in user who owns the picture.
+- **Bucket 1: Profile Pictures**
+    - **Bucket ID**: `profile_pictures`
+    - **Permissions**:
+        - Read: Any user (to view profile pictures).
+        - Write: Only the logged-in user who owns the picture.
+
+- **Bucket 2: Verification Documents**
+    - **Bucket ID**: `verification_documents`
+    - **Permissions**:
+        - Read: Admin role only.
+        - Write: The logged-in user submitting the document.
 
 ---
 
@@ -68,7 +74,24 @@ Stores the detailed public and private profile information for each user.
     - `isVerified` (boolean, default: `false`) - To be updated by an admin.
     - `userId` (string, required, unique) - This links the profile to the Appwrite Auth user.
 
-### b. `success_stories` Collection
+### b. `verification_requests` Collection
+
+Manages the verification requests submitted by users.
+
+- **Collection ID**: `verification_requests`
+- **Permissions**:
+    - Write: Any logged-in user.
+    - Read/Update: Admin role only.
+- **Attributes**:
+    - `userId` (string, required) - The user requesting verification.
+    - `documentFileIds` (string array, required) - Array of file IDs from the `verification_documents` bucket.
+    - `status` (string, required, enum: 'pending', 'approved', 'rejected', default: 'pending')
+    - `submittedAt` (datetime, required)
+    - `reviewedAt` (datetime, optional)
+    - `reviewedBy` (string, optional) - ID of the admin who reviewed the request.
+
+
+### c. `success_stories` Collection
 
 Stores the success stories to be displayed on the platform.
 
@@ -83,7 +106,7 @@ Stores the success stories to be displayed on the platform.
     - `imageId` (string, required) - File ID from a dedicated `success_story_images` bucket.
     - `publishedAt` (datetime, required)
 
-### c. `interests` Collection
+### d. `interests` Collection
 
 Manages the "interest" or "proposal" interactions between users.
 

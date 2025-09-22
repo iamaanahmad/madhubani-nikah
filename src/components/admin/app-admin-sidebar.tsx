@@ -13,6 +13,7 @@ import {
   ShieldAlert,
   ShoppingCart,
   Users,
+  ShieldCheck,
 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +32,7 @@ import { Sidebar, SidebarContent, SidebarHeader, SidebarMenu, SidebarMenuItem, S
 const adminNavLinks = [
     { href: '/admin', label: 'Dashboard', icon: Home },
     { href: '/admin/users', label: 'Users', icon: Users, badge: '12' },
+    { href: '/admin/verifications', label: 'Verifications', icon: ShieldCheck, badge: '3' },
     { href: '/admin/stories', label: 'Success Stories', icon: Heart },
     { href: '/admin/reports', label: 'Reports', icon: ShieldAlert, badge: '4' },
     { href: '/admin/analytics', label: 'Analytics', icon: LineChart },

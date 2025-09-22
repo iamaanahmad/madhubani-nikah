@@ -16,6 +16,7 @@ import {
   LifeBuoy,
   LogOut,
   Settings,
+  ShieldCheck,
   User,
 } from 'lucide-react';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -28,7 +29,7 @@ import { useLocale, useTranslations } from 'next-intl';
 
 export function AppHeader() {
   const t = useTranslations('Header');
-  const loggedIn = false; // Placeholder for auth state
+  const loggedIn = true; // Placeholder for auth state
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
@@ -107,9 +108,17 @@ export function AppHeader() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <User className="mr-2" />
-                <span>Profile</span>
+              <DropdownMenuItem asChild>
+                <Link href={`/profile/${currentUser.id.replace('user-', '')}`}>
+                    <User className="mr-2" />
+                    <span>My Profile</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                 <Link href="/profile/verify">
+                    <ShieldCheck className="mr-2" />
+                    <span>Get Verified</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2" />
