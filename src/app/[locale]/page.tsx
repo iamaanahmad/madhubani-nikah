@@ -6,7 +6,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Handshake, CircleCheckBig, Users, Sparkles, Video } from 'lucide-react';
 import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { NikahSimplifiedCard } from '@/components/shared/nikah-simplified-card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 import MainLayout from '@/components/layout/main-layout';
 import { AppTour } from '@/components/shared/app-tour';
 import { useTranslations } from 'next-intl';
@@ -16,7 +15,6 @@ import { GuidanceVideosCarousel } from '@/components/shared/guidance-videos-caro
 
 export default function Home() {
   const t = useTranslations('HomePage');
-  const heroImage = PlaceHolderImages.find((img) => img.id === 'hero');
 
   return (
     <MainLayout>
@@ -24,15 +22,12 @@ export default function Home() {
       <div className="flex flex-col">
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[70vh] text-white">
-          {heroImage && (
-            <Image
-              src={heroImage.imageUrl}
-              alt="Couple holding hands"
-              fill
-              className="object-cover"
-              data-ai-hint={heroImage.imageHint}
-            />
-          )}
+          <Image
+            src="/nikahbg.png"
+            alt="Couple holding hands"
+            fill
+            className="object-cover"
+          />
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
             <h1 className="font-headline text-4xl md:text-6xl font-bold">
