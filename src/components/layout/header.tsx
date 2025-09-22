@@ -52,14 +52,14 @@ export function AppHeader() {
         <SidebarTrigger className="md:hidden" />
         <Logo />
       </div>
-      <nav className="hidden md:flex flex-1 items-center justify-center gap-4 text-sm font-medium">
+      <nav className="hidden flex-1 md:flex items-center justify-center gap-4 text-sm font-medium">
         {translatedNavLinks.map(link => (
             <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
                 {link.label}
             </Link>
         ))}
       </nav>
-      <div className="flex items-center justify-end gap-2">
+      <div className="flex flex-1 items-center justify-end gap-2 md:flex-initial">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon" id="language-switcher">
