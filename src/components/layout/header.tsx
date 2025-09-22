@@ -60,7 +60,7 @@ export function AppHeader() {
       <div className="flex items-center justify-end gap-2 md:gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" id="language-switcher">
               <Languages className="h-[1.2rem] w-[1.2rem]" />
               <span className="sr-only">{t('language')}</span>
             </Button>

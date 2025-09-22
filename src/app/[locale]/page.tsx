@@ -9,7 +9,7 @@ import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Logo } from '@/components/shared/logo';
 import MainLayout from '@/components/layout/main-layout';
-import { OnboardingModal } from '@/components/shared/onboarding-modal';
+import { AppTour } from '@/components/shared/app-tour';
 import { useTranslations } from 'next-intl';
 
 export default function Home() {
@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <OnboardingModal />
+      <AppTour />
       <div className="flex flex-col">
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[70vh] text-white">
@@ -40,10 +40,10 @@ export default function Home() {
               {t('heroSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild id="create-profile-button">
                 <Link href="/register">{t('createProfile')}</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20" asChild>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20" asChild id="browse-profiles-button">
                  <Link href="/browse">{t('browseProfiles')}</Link>
               </Button>
             </div>
@@ -82,7 +82,7 @@ export default function Home() {
           <Separator />
 
           {/* Nearby Profiles */}
-          <section>
+          <section id="nearby-profiles-section">
             <div className="text-center">
               <h2 className="font-headline text-3xl md:text-4xl font-semibold">
                 {t('nearbyProfiles')}
