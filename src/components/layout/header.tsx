@@ -72,7 +72,7 @@ export function AppHeader() {
           </DropdownMenuContent>
         </DropdownMenu>
         
-        <Button variant="outline" size="icon" asChild>
+        <Button variant="outline" size="icon" asChild className="hidden md:inline-flex">
             <Link href="/help">
               <LifeBuoy className="h-[1.2rem] w-[1.2rem]" />
               <span className="sr-only">Help & Support</span>

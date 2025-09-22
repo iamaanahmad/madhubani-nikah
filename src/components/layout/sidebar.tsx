@@ -16,9 +16,11 @@ import { usePathname } from 'next/navigation';
 import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
 import { navLinks } from './nav-links';
+import { useTranslations } from 'next-intl';
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const t = useTranslations('Header');
 
   return (
     <>
@@ -26,18 +28,18 @@ export function AppSidebar() {
         <Logo />
       </SidebarHeader>
       <Separator />
-      <SidebarContent>
+      <SidebarContent className="p-2">
         <SidebarMenu>
           {navLinks.map((link) => (
             <SidebarMenuItem key={link.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname === link.href}
-                tooltip={link.label}
+                isActive={pathname.endsWith(link.href)}
+                tooltip={t(link.label as any)}
               >
-                <a href={link.href}>
+                <a href={link.href} className="text-base h-11">
                   <link.icon />
-                  <span>{link.label}</span>
+                  <span>{t(link.label as any)}</span>
                 </a>
               </SidebarMenuButton>
             </SidebarMenuItem>
@@ -49,7 +51,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings">
-              <a href="/settings">
+              <a href="/settings" className="text-base h-11">
                 <Settings />
                 <span>Settings</span>
               </a>
