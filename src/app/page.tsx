@@ -9,12 +9,14 @@ import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Logo } from '@/components/shared/logo';
 import MainLayout from '@/components/layout/main-layout';
+import { OnboardingModal } from '@/components/shared/onboarding-modal';
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero');
 
   return (
     <MainLayout>
+      <OnboardingModal />
       <div className="flex flex-col">
         {/* Hero Section */}
         <section className="relative w-full h-[60vh] md:h-[70vh] text-white">
@@ -39,7 +41,7 @@ export default function Home() {
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
                 <Link href="/register">Create Profile</Link>
               </Button>
-              <Button size="lg" variant="outline" className="border-white hover:bg-white/20" asChild>
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20" asChild>
                  <Link href="/browse">Browse Profiles</Link>
               </Button>
             </div>

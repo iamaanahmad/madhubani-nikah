@@ -51,6 +51,7 @@ export function MatchCard({
   isLoggedIn = false,
 }: MatchCardProps) {
   const showPhoto = isLoggedIn && !profile.isPhotoBlurred;
+  const profileLink = `/profile/${profile.id}`;
 
   const cardContent = (
     <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
@@ -128,8 +129,8 @@ export function MatchCard({
           <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
             <Heart className="mr-2" /> Propose
           </Button>
-          <Button variant="outline" className="w-full">
-            View Profile
+          <Button variant="outline" className="w-full" asChild>
+            <Link href={profileLink}>View Profile</Link>
           </Button>
         </CardFooter>
       )}
