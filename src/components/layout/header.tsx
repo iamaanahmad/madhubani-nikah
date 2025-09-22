@@ -24,9 +24,10 @@ import { currentUser } from '@/lib/data';
 import Link from 'next/link';
 import { navLinks } from './nav-links';
 import { usePathname, useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export function AppHeader() {
+  const t = useTranslations('Header');
   const loggedIn = false; // Placeholder for auth state
   const pathname = usePathname();
   const router = useRouter();
@@ -38,6 +39,11 @@ export function AppHeader() {
     router.replace(newPath);
   };
 
+  const translatedNavLinks = navLinks.map(link => ({
+    ...link,
+    label: t(link.label as any),
+  }));
+
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-8">
       <div className="flex items-center gap-6">
@@ -45,7 +51,7 @@ export function AppHeader() {
         <Logo />
       </div>
       <nav className="hidden md:flex flex-1 items-center justify-center gap-4 text-sm font-medium">
-        {navLinks.map(link => (
+        {translatedNavLinks.map(link => (
             <Link key={link.href} href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
                 {link.label}
             </Link>
@@ -56,7 +62,7 @@ export function AppHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="outline" size="icon">
               <Languages className="h-[1.2rem] w-[1.2rem]" />
-              <span className="sr-only">Switch language</span>
+              <span className="sr-only">{t('language')}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -118,7 +124,7 @@ export function AppHeader() {
           </DropdownMenu>
         ) : (
           <Button asChild>
-            <Link href="/login">Login</Link>
+            <Link href="/login">{t('login')}</Link>
           </Button>
         )}
       </div>

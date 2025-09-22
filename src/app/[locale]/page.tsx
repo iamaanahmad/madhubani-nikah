@@ -10,8 +10,10 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Logo } from '@/components/shared/logo';
 import MainLayout from '@/components/layout/main-layout';
 import { OnboardingModal } from '@/components/shared/onboarding-modal';
+import { useTranslations } from 'next-intl';
 
 export default function Home() {
+  const t = useTranslations('HomePage');
   const heroImage = PlaceHolderImages.find((img) => img.id === 'hero');
 
   return (
@@ -32,17 +34,17 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center p-4">
             <h1 className="font-headline text-4xl md:text-6xl font-bold">
-              Find Your Life Partner - The Islamic Way
+              {t('heroTitle')}
             </h1>
             <p className="font-body text-lg md:text-xl mt-4 max-w-2xl">
-              A FREE platform for the Muslim community of Madhubani. With a focus on privacy and Islamic values.
+              {t('heroSubtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 mt-8">
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                <Link href="/register">Create Profile</Link>
+                <Link href="/register">{t('createProfile')}</Link>
               </Button>
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/20" asChild>
-                 <Link href="/browse">Browse Profiles</Link>
+                 <Link href="/browse">{t('browseProfiles')}</Link>
               </Button>
             </div>
           </div>
@@ -83,10 +85,10 @@ export default function Home() {
           <section>
             <div className="text-center">
               <h2 className="font-headline text-3xl md:text-4xl font-semibold">
-                Nearby Profiles
+                {t('nearbyProfiles')}
               </h2>
               <p className="text-muted-foreground mt-2">
-                Get a glimpse of profiles from your area.
+                {t('nearbyProfilesSubtitle')}
               </p>
             </div>
             <div className="mt-8">
@@ -94,7 +96,7 @@ export default function Home() {
             </div>
             <div className="text-center mt-8">
               <Button variant="link" asChild>
-                  <Link href="/browse">Register to see all profiles</Link>
+                  <Link href="/browse">{t('seeAllProfiles')}</Link>
               </Button>
             </div>
           </section>

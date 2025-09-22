@@ -12,8 +12,10 @@ import { Label } from '@/components/ui/label';
 import { LogIn } from 'lucide-react';
 import Link from 'next/link';
 import MainLayout from '@/components/layout/main-layout';
+import { useTranslations } from 'next-intl';
 
 export default function LoginPage() {
+  const t = useTranslations('Buttons');
   return (
     <MainLayout>
       <div className="container mx-auto flex min-h-[80vh] items-center justify-center p-4 md:p-8">
@@ -43,7 +45,7 @@ export default function LoginPage() {
                     <Label htmlFor="password">Password</Label>
                     <Input id="password" type="password" />
                   </div>
-                  <Button className="w-full">Login</Button>
+                  <Button className="w-full">{t('login')}</Button>
                   <Button variant="link" className="w-full text-sm">
                     Forgot password?
                   </Button>

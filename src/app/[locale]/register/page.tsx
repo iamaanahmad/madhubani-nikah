@@ -11,8 +11,10 @@ import { Label } from '@/components/ui/label';
 import { UserPlus } from 'lucide-react';
 import Link from 'next/link';
 import MainLayout from '@/components/layout/main-layout';
+import { useTranslations } from 'next-intl';
 
 export default function RegisterPage() {
+  const t = useTranslations('Buttons');
   return (
     <MainLayout>
       <div className="container mx-auto flex min-h-[80vh] items-center justify-center p-4 md:p-8">
@@ -49,7 +51,7 @@ export default function RegisterPage() {
                   reCAPTCHA placeholder
                 </div>
               </div>
-              <Button className="w-full">Create Account</Button>
+              <Button className="w-full">{t('createAccount')}</Button>
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{' '}
