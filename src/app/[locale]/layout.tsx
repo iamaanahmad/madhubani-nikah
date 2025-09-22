@@ -24,6 +24,8 @@ export default function LocaleLayout({
   return (
     <html lang={locale} suppressHydrationWarning dir={locale === 'ur' ? 'rtl' : 'ltr'}>
       <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
