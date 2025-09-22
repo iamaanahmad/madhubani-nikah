@@ -13,12 +13,12 @@ import {
 import {
   Settings,
 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { usePathname } from 'next-intl/navigation';
 import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
 import { navLinks } from './nav-links';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
+import { Link } from 'next-intl/navigation';
 
 export function AppSidebar() {
   const pathname = usePathname();

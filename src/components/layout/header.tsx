@@ -23,9 +23,8 @@ import {
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Logo } from '@/components/shared/logo';
 import { currentUser } from '@/lib/data';
-import Link from 'next/link';
 import { navLinks } from './nav-links';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, Link } from 'next-intl/navigation';
 import { useLocale, useTranslations } from 'next-intl';
 
 export function AppHeader() {
@@ -37,9 +36,7 @@ export function AppHeader() {
   const locale = useLocale();
 
   const handleLanguageChange = (newLocale: string) => {
-    // This will replace the locale in the path and reload the page.
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.replace(newPath);
+    router.replace(pathname, {locale: newLocale});
   };
 
   const translatedNavLinks = navLinks.map(link => ({

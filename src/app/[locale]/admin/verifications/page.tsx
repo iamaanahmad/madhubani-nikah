@@ -16,7 +16,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ShieldCheck, Eye, Check, X } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'next-intl/navigation';
 
 const pendingVerifications = [
   { id: 'v1', userId: 'user-4', name: 'Yusuf Ahmed', submittedAt: '2024-05-20T10:00:00Z' },

@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { LogIn } from 'lucide-react';
-import Link from 'next/link';
+import { Link } from 'next-intl/navigation';
 import MainLayout from '@/components/layout/main-layout';
 import { useTranslations } from 'next-intl';
 
