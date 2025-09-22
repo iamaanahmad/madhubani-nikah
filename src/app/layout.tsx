@@ -25,10 +25,10 @@ export default function RootLayout({
         />
       </head>
       <body className="font-body antialiased">
-        <TooltipProvider>
-          <MainLayout>{children}</MainLayout>
-        </TooltipProvider>
-        <Toaster />
+          <TooltipProvider>
+            {children}
+          </TooltipProvider>
+          <Toaster />
       </body>
     </html>
   );
