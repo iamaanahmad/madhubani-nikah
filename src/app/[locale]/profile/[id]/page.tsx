@@ -19,11 +19,13 @@ import {
   Shield,
   Tag,
   User,
+  Users,
 } from 'lucide-react';
 import { mockMatches, currentUser } from '@/lib/data';
 import { VerifiedBadge } from '@/components/profile/verified-badge';
 import MainLayout from '@/components/layout/main-layout';
 import { Separator } from '@/components/ui/separator';
+import { EyeOff } from 'lucide-react';
 
 export default function ProfilePage({ params }: { params: { id: string } }) {
   const profile = [...mockMatches, currentUser].find(
@@ -40,7 +42,9 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
     );
   }
 
-  const showPhoto = !profile.isPhotoBlurred;
+  // A logged-in user can see their own photo even if blurred
+  const isLoggedInUser = profile.id === currentUser.id;
+  const showPhoto = !profile.isPhotoBlurred || isLoggedInUser;
 
   return (
     <MainLayout>
@@ -51,14 +55,19 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
             <Card>
               <CardHeader className="p-0">
                 <div className="aspect-square w-full relative bg-muted rounded-t-lg">
-                  {showPhoto && (
+                  {showPhoto ? (
                     <Image
                       src={profile.profilePicture.url}
                       alt={profile.name}
                       fill
-                      className="object-cover"
+                      className="object-cover rounded-t-lg"
                       data-ai-hint={profile.profilePicture.hint}
                     />
+                  ) : (
+                    <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+                        <EyeOff className="h-16 w-16" />
+                        <p className="mt-2 text-sm">Photo is private</p>
+                    </div>
                   )}
                 </div>
               </CardHeader>
@@ -71,6 +80,9 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
                 </CardTitle>
                 <CardDescription className="flex items-center gap-2 mt-1">
                   <MapPin className="h-4 w-4" /> {profile.village}
+                </CardDescription>
+                 <CardDescription className="flex items-center gap-2 mt-1 capitalize">
+                  <Users className="h-4 w-4" /> {profile.gender}
                 </CardDescription>
               </CardContent>
               <CardContent className="flex gap-2 p-4 pt-0">
@@ -107,7 +119,7 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
                   <BookText className="h-6 w-6 text-primary" />
                   Education & Occupation
                 </CardTitle>
-              </Header>
+              </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <h4 className="font-semibold">Education</h4>
@@ -126,7 +138,7 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
                     <Shield className="h-6 w-6 text-primary" />
                     Religious & Family Background
                 </CardTitle>
-              </Header>
+              </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <h4 className="font-semibold">Religious Practice</h4>
@@ -143,7 +155,7 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
               </CardContent>
             </Card>
             
-            {profile.skills.length > 0 && (
+            {profile.skills && profile.skills.length > 0 && (
               <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2 font-headline">
