@@ -144,18 +144,30 @@ export const islamicContent: IslamicContent[] = [
     id: 1,
     type: 'Quran',
     source: 'Ar-Rum, 30:21',
-    text: 'And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.',
+    textKey: 'quote1',
   },
   {
     id: 2,
     type: 'Hadith',
     source: 'Sahih al-Bukhari',
-    text: 'The most perfect man in his faith among the believers is the one whose behaviour is most excellent; and the best of you are those who are the best to their wives.',
+    textKey: 'quote2',
   },
   {
     id: 3,
     type: 'Quote',
     source: 'Nouman Ali Khan',
-    text: 'A great marriage is not when the "perfect couple" comes together. It is when an imperfect couple learns to enjoy their differences.',
+    textKey: 'quote3',
   },
+  {
+    id: 4,
+    type: 'Hadith',
+    source: 'Mishkat al-Masabih',
+    textKey: 'quote4',
+  },
+  {
+    id: 5,
+    type: 'Quran',
+    source: '24:32',
+    textKey: 'quote5',
+  }
 ];

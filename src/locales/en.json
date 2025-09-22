@@ -18,7 +18,15 @@
     "browseProfiles": "Browse Profiles",
     "nearbyProfiles": "Nearby Profiles",
     "nearbyProfilesSubtitle": "Get a glimpse of profiles from your area.",
-    "seeAllProfiles": "Register to see all profiles"
+    "seeAllProfiles": "Register to see all profiles",
+    "stat1_title": "500+ Successful Nikahs",
+    "stat1_subtitle": "In the Madhubani region.",
+    "stat2_title": "100% Free Service",
+    "stat2_subtitle": "No hidden fees, ever.",
+    "stat3_title": "Total Privacy Protection",
+    "stat3_subtitle": "Your data is safe with us.",
+    "footer_tagline": "Halal Connections, Trusted Platform",
+    "footer_subtitle": "Trusted Islamic Matrimony for Madhubani"
   },
   "Buttons": {
     "createAccount": "Create Account",
@@ -35,5 +43,29 @@
     "step4_content": "Get a glimpse of profiles from your local area right here on the homepage.",
     "step5_title": "Switch Language",
     "step5_content": "You can switch the language between English, Hindi, and Urdu to use the site comfortably."
+  },
+  "Quotes": {
+    "title": "Today's Inspiring Verse",
+    "quote1": "And of His signs is that He created for you from yourselves mates that you may find tranquility in them; and He placed between you affection and mercy.",
+    "quote2": "The most perfect man in his faith among the believers is the one whose behaviour is most excellent; and the best of you are those who are the best to their wives.",
+    "quote3": "A great marriage is not when the 'perfect couple' comes together. It is when an imperfect couple learns to enjoy their differences.",
+    "quote4": "When a person marries, they have fulfilled half of their religion.",
+    "quote5": "And marry those among you who are single."
+  },
+  "NikahSimplified": {
+    "mainTitle": "Nikah, Simplified and Blessed",
+    "mainSubtitle": "Our platform is built on Islamic principles to make finding a righteous partner easier for both families and individuals.",
+    "parents_title": "A Message to Respected Parents",
+    "parents_subtitle": "Fulfilling your sacred duty with ease and trust.",
+    "parents_para1": "Easing the path to Nikah for your children is one of the greatest responsibilities and rewards. Our platform helps you find suitable, verified matches from our community while respecting our traditions. Avoid unnecessary delays and societal pressures.",
+    "parents_para2": "Involve yourself in a blessed process, where character and piety are valued above all. With our help, you can connect with families who share your values.",
+    "youth_title": "Guidance for Our Youth",
+    "youth_subtitle": "Start your journey with the right intentions.",
+    "youth_step1_title": "Focus on Deen & Character",
+    "youth_step1_desc": "Look for a partner whose faith and character will help you grow closer to Allah.",
+    "youth_step2_title": "Be Honest & Clear",
+    "youth_step2_desc": "Create a sincere profile. Honesty is the foundation of a blessed union.",
+    "youth_step3_title": "Involve Your Family",
+    "youth_step3_desc": "Seek the guidance and blessings of your elders. Our platform facilitates family involvement."
   }
 }

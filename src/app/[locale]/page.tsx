@@ -6,6 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
 import { Handshake, CircleCheckBig, Users } from 'lucide-react';
 import { IslamicContentCard } from '@/components/shared/islamic-content-card';
+import { NikahSimplifiedCard } from '@/components/shared/nikah-simplified-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Logo } from '@/components/shared/logo';
 import MainLayout from '@/components/layout/main-layout';
@@ -56,28 +57,33 @@ export default function Home() {
             <Card className="bg-card/80">
               <CardContent className="p-6">
                 <Handshake className="h-12 w-12 mx-auto text-primary" />
-                <h3 className="text-2xl font-bold mt-4">500+ Successful Nikahs</h3>
-                <p className="text-muted-foreground mt-2">In the Madhubani region.</p>
+                <h3 className="text-2xl font-bold mt-4">{t('stat1_title')}</h3>
+                <p className="text-muted-foreground mt-2">{t('stat1_subtitle')}</p>
               </CardContent>
             </Card>
             <Card className="bg-card/80">
               <CardContent className="p-6">
                 <CircleCheckBig className="h-12 w-12 mx-auto text-primary" />
-                <h3 className="text-2xl font-bold mt-4">100% Free Service</h3>
-                <p className="text-muted-foreground mt-2">No hidden fees, ever.</p>
+                <h3 className="text-2xl font-bold mt-4">{t('stat2_title')}</h3>
+                <p className="text-muted-foreground mt-2">{t('stat2_subtitle')}</p>
               </CardContent>
             </Card>
             <Card className="bg-card/80">
               <CardContent className="p-6">
                 <Users className="h-12 w-12 mx-auto text-primary" />
-                <h3 className="text-2xl font-bold mt-4">Total Privacy Protection</h3>
-                <p className="text-muted-foreground mt-2">Your data is safe with us.</p>
+                <h3 className="text-2xl font-bold mt-4">{t('stat3_title')}</h3>
+                <p className="text-muted-foreground mt-2">{t('stat3_subtitle')}</p>
               </CardContent>
             </Card>
           </section>
 
           {/* Islamic Content */}
           <IslamicContentCard />
+          
+          <Separator />
+
+          {/* Nikah Simplified Section */}
+          <NikahSimplifiedCard />
 
           <Separator />
 
@@ -106,8 +112,8 @@ export default function Home() {
         <footer className="bg-muted text-muted-foreground p-8 mt-12">
           <div className="container mx-auto text-center">
             <Logo />
-            <p className="mt-4 text-sm">Halal Rishte, Bharosemand Platform</p>
-            <p className="text-xs">Trusted Islamic Matrimony for Madhubani</p>
+            <p className="mt-4 text-sm">{t('footer_tagline')}</p>
+            <p className="text-xs">{t('footer_subtitle')}</p>
             <div className="flex justify-center gap-4 mt-4">
               <Link href="/about" className="text-sm hover:text-primary">About Us</Link>
               <Link href="/help" className="text-sm hover:text-primary">Contact</Link>

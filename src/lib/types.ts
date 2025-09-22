@@ -25,5 +25,5 @@ export type IslamicContent = {
   id: number;
   type: 'Quran' | 'Hadith' | 'Quote';
   source?: string;
-  text: string;
+  textKey: string;
 };
