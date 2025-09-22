@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import {
   Card,
   CardContent,
@@ -21,24 +22,38 @@ import {
   MoreVertical,
   ShieldAlert,
   Slash,
-  Sparkles,
   EyeOff,
 } from 'lucide-react';
 import { VerifiedBadge } from '@/components/profile/verified-badge';
 import type { UserProfile } from '@/lib/types';
-import { cn } from '@/lib/utils';
 import { SmartMatchExplainer } from './smart-match-explainer';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 
 type MatchCardProps = {
   profile: UserProfile;
   preview?: boolean;
+  isLoggedIn?: boolean;
 };
 
-export function MatchCard({ profile, preview = false }: MatchCardProps) {
-  const showPhoto = !preview && !profile.isPhotoBlurred;
+export function MatchCard({
+  profile,
+  preview = false,
+  isLoggedIn = false,
+}: MatchCardProps) {
+  const showPhoto = isLoggedIn && !profile.isPhotoBlurred;
 
-  return (
-    <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg">
+  const cardContent = (
+    <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
       <CardHeader className="relative p-0">
         <div className="aspect-square w-full bg-muted flex items-center justify-center">
           {showPhoto ? (
@@ -51,10 +66,12 @@ export function MatchCard({ profile, preview = false }: MatchCardProps) {
               className="aspect-square w-full object-cover"
             />
           ) : (
-             <div className="flex flex-col items-center text-muted-foreground">
-                <EyeOff className="h-12 w-12" />
-                <span className="text-sm mt-2">{preview ? "Register to view" : "Photo is private"}</span>
-             </div>
+            <div className="flex flex-col items-center text-muted-foreground">
+              <EyeOff className="h-12 w-12" />
+              <span className="text-sm mt-2">
+                {isLoggedIn ? 'Photo is private' : 'Login to view'}
+              </span>
+            </div>
           )}
         </div>
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
@@ -65,7 +82,7 @@ export function MatchCard({ profile, preview = false }: MatchCardProps) {
             {profile.isVerified && <VerifiedBadge />}
           </CardTitle>
         </div>
-        {!preview && (
+        {!preview && isLoggedIn && (
           <div className="absolute top-2 right-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -78,7 +95,7 @@ export function MatchCard({ profile, preview = false }: MatchCardProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <SmartMatchExplainer matchProfile={profile} />
+                <SmartMatchExplainer profile={profile} />
                 <DropdownMenuItem>
                   <ShieldAlert className="mr-2" /> Report
                 </DropdownMenuItem>
@@ -106,7 +123,7 @@ export function MatchCard({ profile, preview = false }: MatchCardProps) {
           </div>
         </div>
       </CardContent>
-      {!preview && (
+      {!preview && isLoggedIn && (
         <CardFooter className="flex gap-2 bg-muted/50 p-4">
           <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
             <Heart className="mr-2" /> Propose
@@ -117,5 +134,32 @@ export function MatchCard({ profile, preview = false }: MatchCardProps) {
         </CardFooter>
       )}
     </Card>
+  );
+
+  if (isLoggedIn || preview) {
+    return cardContent;
+  }
+
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <div className="cursor-pointer">{cardContent}</div>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Create a free account to view details</AlertDialogTitle>
+          <AlertDialogDescription>
+            To protect our members' privacy, you need to create an account to
+            view full profiles and photos. It's completely free.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Link href="/login">Login or Sign Up</Link>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 }

@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { MatchList } from '@/components/matches/match-list';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
-import { CheckCircle, Users, Handshake } from 'lucide-react';
+import { Handshake, CircleCheckBig, Users } from 'lucide-react';
 import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Logo } from '@/components/shared/logo';
@@ -33,11 +34,11 @@ export default function Home() {
             A FREE platform for the Muslim community of Madhubani. With a focus on privacy and Islamic values.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-8">
-            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Create Profile
+            <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild>
+              <Link href="/login">Create Profile</Link>
             </Button>
-            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10">
-              Browse Profiles
+            <Button size="lg" variant="outline" className="text-white border-white hover:bg-white/10" asChild>
+               <Link href="/browse">Browse Profiles</Link>
             </Button>
           </div>
         </div>
@@ -55,7 +56,7 @@ export default function Home() {
           </Card>
           <Card className="bg-card/80">
             <CardContent className="p-6">
-              <CheckCircle className="h-12 w-12 mx-auto text-primary" />
+              <CircleCheckBig className="h-12 w-12 mx-auto text-primary" />
               <h3 className="text-2xl font-bold mt-4">100% Free Service</h3>
               <p className="text-muted-foreground mt-2">No hidden fees, ever.</p>
             </CardContent>
@@ -88,7 +89,9 @@ export default function Home() {
             <MatchList preview={true} />
           </div>
           <div className="text-center mt-8">
-            <Button variant="link">Register to see all profiles</Button>
+            <Button variant="link" asChild>
+                <Link href="/browse">Register to see all profiles</Link>
+            </Button>
           </div>
         </section>
       </div>
@@ -100,9 +103,9 @@ export default function Home() {
           <p className="mt-4 text-sm">Halal Rishte, Bharosemand Platform</p>
           <p className="text-xs">Trusted Islamic Matrimony for Madhubani</p>
           <div className="flex justify-center gap-4 mt-4">
-            <a href="/about" className="text-sm hover:text-primary">About Us</a>
-            <a href="/help" className="text-sm hover:text-primary">Contact</a>
-            <a href="/privacy" className="text-sm hover:text-primary">Privacy Policy</a>
+            <Link href="/about" className="text-sm hover:text-primary">About Us</Link>
+            <Link href="/help" className="text-sm hover:text-primary">Contact</Link>
+            <Link href="/privacy" className="text-sm hover:text-primary">Privacy Policy</Link>
           </div>
         </div>
       </footer>

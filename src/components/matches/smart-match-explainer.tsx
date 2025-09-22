@@ -8,18 +8,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Loader2, Sparkles } from 'lucide-react';
 import { explainMatch } from '@/ai/flows/smart-match-explanation';
 import { currentUser } from '@/lib/data';
 import type { UserProfile } from '@/lib/types';
-import { DropdownMenuItem } from '../ui/dropdown-menu';
 
 interface SmartMatchExplainerProps {
-  matchProfile: UserProfile;
+  profile: UserProfile;
 }
 
 export function SmartMatchExplainer({
-  matchProfile,
+  profile,
 }: SmartMatchExplainerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
   const [explanation, setExplanation] = React.useState('');
@@ -34,7 +34,7 @@ export function SmartMatchExplainer({
       try {
         // Stringify profiles for the AI prompt
         const userProfileStr = JSON.stringify(currentUser, null, 2);
-        const matchProfileStr = JSON.stringify(matchProfile, null, 2);
+        const matchProfileStr = JSON.stringify(profile, null, 2);
 
         const result = await explainMatch({
           userProfile: userProfileStr,
@@ -67,7 +67,7 @@ export function SmartMatchExplainer({
             Smart Match Analysis
           </DialogTitle>
           <DialogDescription>
-            Here&apos;s why {matchProfile.name} could be a good match for your
+            Here&apos;s why {profile.name} could be a good match for your
             ward.
           </DialogDescription>
         </DialogHeader>
