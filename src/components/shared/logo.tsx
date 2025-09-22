@@ -1,4 +1,4 @@
-import Link from 'next-intl/link';
+import { Link } from 'next-intl/navigation';
 import Image from 'next/image';
 
 export function Logo() {
