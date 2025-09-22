@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
-import { Handshake, CircleCheckBig, Users, Sparkles } from 'lucide-react';
+import { Handshake, CircleCheckBig, Users, Sparkles, Video } from 'lucide-react';
 import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { NikahSimplifiedCard } from '@/components/shared/nikah-simplified-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
@@ -12,6 +12,7 @@ import { AppTour } from '@/components/shared/app-tour';
 import { useTranslations } from 'next-intl';
 import { DonationCard } from '@/components/shared/donation-card';
 import { NewProfilesCarousel } from '@/components/shared/new-profiles-carousel';
+import { GuidanceVideosCarousel } from '@/components/shared/guidance-videos-carousel';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -105,6 +106,24 @@ export default function Home() {
               <Button asChild>
                   <Link href="/profiles">{t('seeAllProfiles')}</Link>
               </Button>
+            </div>
+          </section>
+
+          <Separator />
+
+           {/* Video Guidance Section */}
+          <section>
+            <div className="text-center">
+              <h2 className="font-headline text-3xl md:text-4xl font-semibold flex items-center justify-center gap-2">
+                <Video className="h-8 w-8 text-primary" />
+                {t('videoGuidanceTitle')}
+              </h2>
+              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                {t('videoGuidanceSubtitle')}
+              </p>
+            </div>
+            <div className="mt-8">
+              <GuidanceVideosCarousel />
             </div>
           </section>
 
