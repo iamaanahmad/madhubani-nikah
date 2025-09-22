@@ -14,7 +14,5 @@ import {
     { href: '/search', label: 'search', icon: Search },
     { href: '/stories', label: 'successStories', icon: Heart },
     { href: '/guidance', label: 'islamicGuidance', icon: BookOpen },
-    { href: '/about', label: 'aboutUs', icon: Info },
-    { href: '/help', label: 'help', icon: LifeBuoy },
   ];
   
