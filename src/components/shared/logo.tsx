@@ -1,10 +1,10 @@
-import { Link } from 'next-intl/navigation';
+import Link from 'next-intl/link';
 import Image from 'next/image';
 
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2 group">
-      <Image src="/IconLogo.png" alt="Madhubani Nikah Logo" width={32} height={32} />
+      <Image src="/IconLogo.png" alt="Madhubani Nikah Logo" width={40} height={40} />
       <div className="flex flex-col">
         <h1 className="font-headline text-lg font-bold tracking-tight text-foreground">
           Madhubani Nikah

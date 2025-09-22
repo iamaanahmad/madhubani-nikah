@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from 'next-intl/navigation';
+import Link from 'next-intl/link';
 import {
   Card,
   CardContent,
@@ -77,14 +77,22 @@ export function MatchCard({
   const cardContent = (
     <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
       <CardHeader className="relative p-0">
-        <Link href={profileLink} className="block aspect-square w-full">
-          <ImageContent />
-        </Link>
+        {preview ? (
+            <div className="block aspect-square w-full">
+              <ImageContent />
+            </div>
+        ) : (
+            <Link href={profileLink} className="block aspect-square w-full">
+              <ImageContent />
+            </Link>
+        )}
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
            <CardTitle className="flex items-center gap-2 font-headline text-2xl">
-            <span>
-              {profile.name}, {profile.age}
-            </span>
+            <Link href={profileLink} className="hover:underline">
+              <span>
+                {profile.name}, {profile.age}
+              </span>
+            </Link>
             {profile.isVerified && <VerifiedBadge />}
           </CardTitle>
         </div>

@@ -24,7 +24,8 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Logo } from '@/components/shared/logo';
 import { currentUser } from '@/lib/data';
 import { navLinks } from './nav-links';
-import { usePathname, useRouter, Link } from 'next-intl/navigation';
+import { usePathname, useRouter } from 'next-intl/navigation';
+import Link from 'next-intl/link';
 import { useLocale, useTranslations } from 'next-intl';
 
 export function AppHeader() {
