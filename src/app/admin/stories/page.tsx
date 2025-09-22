@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Heart, PlusCircle } from 'lucide-react';
+import { Heart } from 'lucide-react';
+import { AddStoryDialog } from '@/components/admin/add-story-dialog';
 
 export default function AdminStoriesPage() {
   return (
@@ -21,10 +21,7 @@ export default function AdminStoriesPage() {
             Add, edit, or remove success stories from the main site.
           </CardDescription>
         </div>
-        <Button>
-          <PlusCircle className="mr-2" />
-          Add Story
-        </Button>
+        <AddStoryDialog />
       </CardHeader>
       <CardContent>
         <div className="flex h-48 items-center justify-center rounded-md border-2 border-dashed">
