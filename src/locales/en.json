@@ -2,12 +2,10 @@
 {
   "Header": {
     "home": "Home",
-    "browseProfiles": "Browse Profiles",
+    "browseProfiles": "Profiles",
     "search": "Search",
     "successStories": "Success Stories",
     "islamicGuidance": "Islamic Guidance",
-    "aboutUs": "About Us",
-    "help": "Help",
     "login": "Login",
     "language": "Language"
   },
@@ -16,9 +14,9 @@
     "heroSubtitle": "A FREE platform for the Muslim community of Madhubani. With a focus on privacy and Islamic values.",
     "createProfile": "Create Profile",
     "browseProfiles": "Browse Profiles",
-    "nearbyProfiles": "Nearby Profiles",
-    "nearbyProfilesSubtitle": "Get a glimpse of profiles from your area.",
-    "seeAllProfiles": "Register to see all profiles",
+    "newProfiles": "Newly Listed Profiles",
+    "newProfilesSubtitle": "Get a glimpse of the latest members to join our community.",
+    "seeAllProfiles": "See All Profiles",
     "stat1_title": "500+ Successful Nikahs",
     "stat1_subtitle": "In the Madhubani region.",
     "stat2_title": "100% Free Service",

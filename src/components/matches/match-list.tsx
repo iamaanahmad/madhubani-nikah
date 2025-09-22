@@ -9,7 +9,7 @@ type MatchListProps = {
 export function MatchList({ preview = false }: MatchListProps) {
   // In a real app, you'd fetch this and get the loggedIn state from auth
   const isLoggedIn = false;
-  const matchesToShow = preview ? mockMatches.slice(0, 4) : mockMatches;
+  const matchesToShow = preview ? mockMatches.slice(0, 4) : mockMatches.slice(0, 10);
 
   return (
     <>
@@ -27,13 +27,13 @@ export function MatchList({ preview = false }: MatchListProps) {
                 <PaginationItem>
                 <PaginationLink href="#">1</PaginationLink>
                 </PaginationItem>
-                <PaginationItem>
-                <PaginationLink href="#" isActive>
-                    2
-                </PaginationLink>
+                 <PaginationItem>
+                <PaginationLink href="#">2</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                <PaginationLink href="#">3</PaginationLink>
+                <PaginationLink href="#" isActive>
+                    3
+                </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
                 <PaginationEllipsis />

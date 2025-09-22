@@ -1,19 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MatchList } from '@/components/matches/match-list';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
-import { Handshake, CircleCheckBig, Users } from 'lucide-react';
+import { Handshake, CircleCheckBig, Users, Sparkles } from 'lucide-react';
 import { IslamicContentCard } from '@/components/shared/islamic-content-card';
 import { NikahSimplifiedCard } from '@/components/shared/nikah-simplified-card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Logo } from '@/components/shared/logo';
 import MainLayout from '@/components/layout/main-layout';
 import { AppTour } from '@/components/shared/app-tour';
 import { useTranslations } from 'next-intl';
-import { AccessibilityToolbar } from '@/components/shared/accessibility-toolbar';
 import { DonationCard } from '@/components/shared/donation-card';
+import { NewProfilesCarousel } from '@/components/shared/new-profiles-carousel';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -47,7 +45,7 @@ export default function Home() {
                 <Link href="/register">{t('createProfile')}</Link>
               </Button>
               <Button size="lg" variant="secondary" className="bg-white/90 text-secondary-foreground hover:bg-white" asChild id="browse-profiles-button">
-                 <Link href="/browse">{t('browseProfiles')}</Link>
+                 <Link href="/profiles">{t('browseProfiles')}</Link>
               </Button>
             </div>
           </div>
@@ -89,22 +87,23 @@ export default function Home() {
 
           <Separator />
 
-          {/* Nearby Profiles */}
+          {/* Newly Listed Profiles */}
           <section id="nearby-profiles-section">
             <div className="text-center">
-              <h2 className="font-headline text-3xl md:text-4xl font-semibold">
-                {t('nearbyProfiles')}
+               <h2 className="font-headline text-3xl md:text-4xl font-semibold flex items-center justify-center gap-2">
+                <Sparkles className="h-8 w-8 text-accent" />
+                {t('newProfiles')}
               </h2>
               <p className="text-muted-foreground mt-2">
-                {t('nearbyProfilesSubtitle')}
+                {t('newProfilesSubtitle')}
               </p>
             </div>
             <div className="mt-8">
-              <MatchList preview={true} />
+              <NewProfilesCarousel />
             </div>
             <div className="text-center mt-8">
-              <Button variant="link" asChild>
-                  <Link href="/browse">{t('seeAllProfiles')}</Link>
+              <Button asChild>
+                  <Link href="/profiles">{t('seeAllProfiles')}</Link>
               </Button>
             </div>
           </section>
@@ -115,25 +114,6 @@ export default function Home() {
           <DonationCard />
 
         </div>
-
-        {/* Footer */}
-        <footer className="bg-muted text-muted-foreground p-8 mt-12">
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
-            <div className="flex flex-col items-center md:items-start">
-              <Logo />
-              <p className="mt-4 text-sm">{t('footer_tagline')}</p>
-              <p className="text-xs">{t('footer_subtitle')}</p>
-            </div>
-             <div className="flex justify-center gap-4">
-              <Link href="/about" className="text-sm hover:text-primary">About Us</Link>
-              <Link href="/help" className="text-sm hover:text-primary">Contact</Link>
-              <Link href="/privacy" className="text-sm hover:text-primary">Privacy Policy</Link>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <AccessibilityToolbar />
-            </div>
-          </div>
-        </footer>
       </div>
     </MainLayout>
   );
