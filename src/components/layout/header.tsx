@@ -85,7 +85,7 @@ export function AppHeader() {
                     {currentUser.name}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    Guardian Account
+                    {currentUser.email}
                   </p>
                 </div>
               </DropdownMenuLabel>

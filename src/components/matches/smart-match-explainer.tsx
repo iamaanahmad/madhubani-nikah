@@ -67,8 +67,7 @@ export function SmartMatchExplainer({
             Smart Match Analysis
           </DialogTitle>
           <DialogDescription>
-            Here&apos;s why {profile.name} could be a good match for your
-            ward.
+            Here&apos;s why {profile.name} could be a good match for you.
           </DialogDescription>
         </DialogHeader>
         <div className="py-4">

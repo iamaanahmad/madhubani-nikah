@@ -32,10 +32,10 @@ export default function HelpPage() {
           <p>Yes, Madhubani Nikah is 100% free to use for everyone in the community. Our goal is to facilitate Halal marriages, not to make a profit.</p>
           
           <h4>How do you protect my privacy?</h4>
-          <p>We have several privacy features, including photo blurring, guardian controls, and an internal messaging system. Your contact details are never shared without your explicit consent.</p>
+          <p>We have several privacy features, including photo blurring, private browsing, and an internal messaging system. Your contact details are never shared without your explicit consent.</p>
 
-          <h4>Can my parents or guardian manage my profile?</h4>
-          <p>Absolutely. The platform is designed to be guardian-friendly. A Wali can create and manage a profile, communicate with potential matches, and be involved in every step of the process.</p>
+          <h4>Can my family be involved?</h4>
+          <p>Yes. While you are in control of your account, you can choose to share your profile details with your family to involve them in your search for a life partner.</p>
         </CardContent>
       </Card>
     </div>

@@ -24,7 +24,8 @@ export const currentUser: UserProfile = {
   isVerified: true,
   profilePicture: getImage('profile1'),
   isPhotoBlurred: false,
-  bio: "I am a dedicated professional looking for a pious and understanding partner to build a life based on Islamic values. I value honesty, family, and continuous learning."
+  bio: "I am a dedicated professional looking for a pious and understanding partner to build a life based on Islamic values. I value honesty, family, and continuous learning.",
+  email: "ahmed.khan@example.com"
 };
 
 export const mockMatches: UserProfile[] = [
@@ -43,7 +44,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: true,
     profilePicture: getImage('profile2'),
     isPhotoBlurred: true,
-    bio: "Seeking a partner who is kind, respectful, and has a strong connection with his deen. My wali will be handling initial communications."
+    bio: "Seeking a partner who is kind, respectful, and has a strong connection with his deen.",
+    email: "fatima.b@example.com"
   },
   {
     id: 'user-2',
@@ -60,7 +62,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: true,
     profilePicture: getImage('profile3'),
     isPhotoBlurred: false,
-    bio: "An ambitious and family-oriented man looking for a supportive partner. I believe in a balance of deen and dunya."
+    bio: "An ambitious and family-oriented man looking for a supportive partner. I believe in a balance of deen and dunya.",
+    email: "imran.a@example.com"
   },
   {
     id: 'user-3',
@@ -77,7 +80,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: true,
     profilePicture: getImage('profile4'),
     isPhotoBlurred: true,
-    bio: "I am a caring and compassionate person, dedicated to my profession and my faith. Looking for someone with a good character and educational background."
+    bio: "I am a caring and compassionate person, dedicated to my profession and my faith. Looking for someone with a good character and educational background.",
+    email: "aisha.s@example.com"
   },
   {
     id: 'user-4',
@@ -94,7 +98,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: false,
     profilePicture: getImage('profile5'),
     isPhotoBlurred: false,
-    bio: "A simple man with a love for knowledge and history. I am looking for a partner who is intellectually curious and shares a passion for learning."
+    bio: "A simple man with a love for knowledge and history. I am looking for a partner who is intellectually curious and shares a passion for learning.",
+    email: "yusuf.a@example.com"
   },
     {
     id: 'user-5',
@@ -111,7 +116,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: true,
     profilePicture: getImage('profile6'),
     isPhotoBlurred: true,
-    bio: "I am looking for a righteous and protective husband who will be the leader of our family according to Quran and Sunnah. My wali's approval is paramount."
+    bio: "I am looking for a righteous and protective husband who will be the leader of our family according to Quran and Sunnah.",
+    email: "zainab.k@example.com"
   },
   {
     id: 'user-6',
@@ -128,7 +134,8 @@ export const mockMatches: UserProfile[] = [
     isVerified: false,
     profilePicture: getImage('profile7'),
     isPhotoBlurred: false,
-    bio: "A practical and straightforward person. Looking for an honest and simple partner to start a family with."
+bio: "A practical and straightforward person. Looking for an honest and simple partner to start a family with.",
+    email: "bilal.k@example.com"
   },
 ];
 

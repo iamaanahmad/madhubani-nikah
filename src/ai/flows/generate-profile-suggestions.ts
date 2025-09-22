@@ -35,7 +35,7 @@ const prompt = ai.definePrompt({
   name: 'generateProfileSuggestionsPrompt',
   input: {schema: GenerateProfileSuggestionsInputSchema},
   output: {schema: GenerateProfileSuggestionsOutputSchema},
-  prompt: `You are an AI assistant helping guardians create complete and effective profiles for their wards on a matrimony app.
+  prompt: `You are an AI assistant helping users create a complete and effective profile on a matrimony app.
 
   Based on the initial profile details provided, suggest specific improvements or highlight missing information to make the profile more compelling.
 

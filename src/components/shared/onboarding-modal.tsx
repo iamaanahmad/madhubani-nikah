@@ -24,7 +24,7 @@ const onboardingSlides = [
   {
     image: PlaceHolderImages.find((img) => img.id === 'onboarding1'),
     title: 'Create Your Profile with Ease',
-    description: 'Our guided steps help you build a complete profile that truly represents you or your ward.',
+    description: 'Our guided steps help you build a complete profile that truly represents you.',
   },
   {
     image: PlaceHolderImages.find((img) => img.id === 'onboarding2'),
@@ -33,8 +33,8 @@ const onboardingSlides = [
   },
   {
     image: PlaceHolderImages.find((img) => img.id === 'onboarding4'),
-    title: 'Guardian-Approved Connections',
-    description: 'Walis (guardians) can manage profiles and approve communication, ensuring a safe and respectful process.',
+    title: 'Family-Oriented Connections',
+    description: 'Involve your family in your search by sharing profiles and seeking their advice.',
   },
   {
     image: PlaceHolderImages.find((img) => img.id === 'onboarding3'),

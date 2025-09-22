@@ -18,6 +18,7 @@ export type UserProfile = {
   };
   isPhotoBlurred: boolean;
   bio: string;
+  email: string;
 };
 
 export type IslamicContent = {

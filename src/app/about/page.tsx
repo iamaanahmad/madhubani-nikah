@@ -13,7 +13,7 @@ export default function AboutPage() {
         </CardHeader>
         <CardContent className="prose dark:prose-invert max-w-none font-body">
           <p>
-            Madhubani Nikah is a dedicated and trusted Islamic matrimony platform designed specifically for the Muslim community of the Madhubani region. Our mission is to provide a safe, secure, and Halal environment where individuals and their guardians can find suitable life partners according to Islamic values.
+            Madhubani Nikah is a dedicated and trusted Islamic matrimony platform designed specifically for the Muslim community of the Madhubani region. Our mission is to provide a safe, secure, and Halal environment where individuals can find suitable life partners according to Islamic values.
           </p>
           <p>
             We understand the cultural nuances and religious importance of marriage in our community. That's why our platform is built with a "character-first" approach, emphasizing religious practice, education, and family values over superficial attributes.
@@ -21,7 +21,7 @@ export default function AboutPage() {
           <h3>Our Core Principles:</h3>
           <ul>
             <li><strong>Privacy-Focused:</strong> We prioritize your privacy with features like optional photo uploads, blurred photos, and secure messaging.</li>
-            <li><strong>Guardian-Oriented:</strong> We empower Walis (guardians) to be involved in the process, ensuring a respectful and family-approved journey.</li>
+            <li><strong>Family-Oriented:</strong> We encourage family involvement in a way that respects individual choice and control.</li>
             <li><strong>100% Free:</strong> Our service is completely free, removing financial barriers to finding a partner.</li>
             <li><strong>Community-Driven:</strong> We aim to strengthen our community by facilitating blessed unions and upholding Islamic traditions.</li>
           </ul>
