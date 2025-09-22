@@ -42,6 +42,12 @@ export default function RegisterPage() {
               <Label htmlFor="confirm-password">Confirm Password</Label>
               <Input id="confirm-password" type="password" />
             </div>
+            <div className="flex justify-center">
+              {/* reCAPTCHA placeholder */}
+              <div className="w-[304px] h-[78px] bg-muted/50 border rounded-md flex items-center justify-center text-muted-foreground text-sm">
+                reCAPTCHA placeholder
+              </div>
+            </div>
             <Button className="w-full">Create Account</Button>
           </div>
            <div className="mt-4 text-center text-sm">
