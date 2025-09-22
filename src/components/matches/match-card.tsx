@@ -53,29 +53,37 @@ export function MatchCard({
   const showPhoto = isLoggedIn && !profile.isPhotoBlurred;
   const profileLink = `/profile/${profile.id.replace('user-', '')}`;
 
+  const ImageContent = () => (
+    <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden">
+      {showPhoto ? (
+        <Image
+          src={profile.profilePicture.url}
+          alt={profile.name}
+          fill
+          data-ai-hint={profile.profilePicture.hint}
+          className="object-cover"
+        />
+      ) : (
+        <div className="flex flex-col items-center text-muted-foreground text-center p-2">
+          <EyeOff className="h-10 w-10" />
+          <span className="text-xs mt-2">
+            {isLoggedIn ? 'Photo is private' : 'Login to view photo'}
+          </span>
+        </div>
+      )}
+    </div>
+  );
+
   const cardContent = (
     <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
       <CardHeader className="relative p-0">
-        <Link href={profileLink} className="block aspect-square w-full">
-          <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden">
-            {showPhoto ? (
-              <Image
-                src={profile.profilePicture.url}
-                alt={profile.name}
-                fill
-                data-ai-hint={profile.profilePicture.hint}
-                className="object-cover"
-              />
-            ) : (
-              <div className="flex flex-col items-center text-muted-foreground text-center p-2">
-                <EyeOff className="h-10 w-10" />
-                <span className="text-xs mt-2">
-                  {isLoggedIn ? 'Photo is private' : 'Login to view photo'}
-                </span>
-              </div>
-            )}
-          </div>
-        </Link>
+        {preview ? (
+          <ImageContent />
+        ) : (
+          <Link href={profileLink} className="block aspect-square w-full">
+            <ImageContent />
+          </Link>
+        )}
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
            <CardTitle className="flex items-center gap-2 font-headline text-2xl">
             <span>
