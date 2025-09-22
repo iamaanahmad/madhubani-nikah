@@ -67,5 +67,11 @@
     "youth_step2_desc": "Create a sincere profile. Honesty is the foundation of a blessed union.",
     "youth_step3_title": "Involve Your Family",
     "youth_step3_desc": "Seek the guidance and blessings of your elders. Our platform facilitates family involvement."
+  },
+  "Donation": {
+    "title": "Support Our Mission",
+    "subtitle": "Help us keep this platform free for everyone.",
+    "description": "Madhubani Nikah is a 100% free community service. We rely on the generous support of our users to cover server costs, maintenance, and future development. Your contribution, no matter how small, helps us facilitate blessed unions.",
+    "button": "Donate Now"
   }
 }

@@ -13,6 +13,7 @@ import MainLayout from '@/components/layout/main-layout';
 import { AppTour } from '@/components/shared/app-tour';
 import { useTranslations } from 'next-intl';
 import { AccessibilityToolbar } from '@/components/shared/accessibility-toolbar';
+import { DonationCard } from '@/components/shared/donation-card';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -107,6 +108,12 @@ export default function Home() {
               </Button>
             </div>
           </section>
+
+          <Separator />
+
+          {/* Donation Section */}
+          <DonationCard />
+
         </div>
 
         {/* Footer */}
