@@ -13,7 +13,7 @@ export function IslamicContentCard() {
   React.useEffect(() => {
     const timer = setInterval(() => {
       setContentIndex((prevIndex) => (prevIndex + 1) % islamicContent.length);
-    }, 5000); // Rotate every 5 seconds
+    }, 10000); // Rotate every 10 seconds
 
     return () => clearInterval(timer); // Cleanup on unmount
   }, []);
