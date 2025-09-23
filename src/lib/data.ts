@@ -25,7 +25,12 @@ export const currentUser: UserProfile = {
   profilePicture: getImage('profile1'),
   isPhotoBlurred: false,
   bio: "I am a dedicated professional looking for a pious and understanding partner to build a life based on Islamic values. I value honesty, family, and continuous learning.",
-  email: "ahmed.khan@example.com"
+  email: "ahmed.khan@example.com",
+  subSect: 'hanafi',
+  biradari: 'khan',
+  block: 'benipatti',
+  familyType: 'nuclear',
+  maritalStatus: 'single'
 };
 
 export const mockMatches: UserProfile[] = [
@@ -45,7 +50,12 @@ export const mockMatches: UserProfile[] = [
     profilePicture: getImage('profile2'),
     isPhotoBlurred: true,
     bio: "Seeking a partner who is kind, respectful, and has a strong connection with his deen.",
-    email: "fatima.b@example.com"
+    email: "fatima.b@example.com",
+    subSect: 'barelvi',
+    biradari: 'ansari',
+    block: 'madhubani-sadar',
+    familyType: 'joint',
+    maritalStatus: 'single'
   },
   {
     id: 'user-2',

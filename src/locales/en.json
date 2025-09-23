@@ -3,6 +3,7 @@
   "Header": {
     "home": "Home",
     "browseProfiles": "Profiles",
+    "searchProfiles": "Search Profiles",
     "search": "Search",
     "successStories": "Success Stories",
     "islamicGuidance": "Islamic Guidance",
@@ -15,7 +16,7 @@
     "heroTitle": "Find Your Life Partner - The Islamic Way",
     "heroSubtitle": "A FREE platform for the Muslim community of Madhubani. With a focus on privacy and Islamic values.",
     "createProfile": "Create Profile",
-    "browseProfiles": "Browse Profiles",
+    "browseProfiles": "Search Profiles",
     "newProfiles": "Newly Listed Profiles",
     "newProfilesSubtitle": "Get a glimpse of the latest members to join our community.",
     "seeAllProfiles": "See All Profiles",

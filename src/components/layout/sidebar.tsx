@@ -13,7 +13,7 @@ import {
 import {
   Settings,
 } from 'lucide-react';
-import { usePathname, Link } from 'next-intl/navigation';
+import { Link, usePathname } from '@i18n/navigation';
 import { Logo } from '../shared/logo';
 import { Separator } from '../ui/separator';
 import { navLinks } from './nav-links';
