@@ -1,4 +1,4 @@
-import { Link } from 'next-intl/navigation';
+import { Link } from '@i18n/navigation';
 import Image from 'next/image';
 
 export function Logo() {

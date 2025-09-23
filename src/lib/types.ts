@@ -19,6 +19,14 @@ export type UserProfile = {
   isPhotoBlurred: boolean;
   bio: string;
   email: string;
+  // Additional fields for comprehensive filtering
+  familyType?: 'nuclear' | 'joint';
+  maritalStatus?: 'single' | 'divorced' | 'widowed';
+  createdAt?: string;
+  // New comprehensive religious fields
+  subSect?: string;
+  biradari?: string;
+  block?: string;
 };
 
 export type IslamicContent = {

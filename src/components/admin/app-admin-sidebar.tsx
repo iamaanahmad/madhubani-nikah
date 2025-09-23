@@ -1,4 +1,4 @@
-import { Link } from 'next-intl/navigation';
+import { Link } from '@i18n/navigation';
 import {
   Bell,
   CircleUser,

@@ -7,7 +7,7 @@ const withPWA = withPWAInit({
   disable: process.env.NODE_ENV === 'development',
 });
  
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts');
 
 const nextConfig: NextConfig = {
   /* config options here */
