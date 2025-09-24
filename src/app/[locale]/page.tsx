@@ -1,5 +1,5 @@
+'use client';
 import Image from 'next/image';
-import { Link } from '@i18n/navigation';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
@@ -12,6 +12,7 @@ import { useTranslations } from 'next-intl';
 import { DonationCard } from '@/components/shared/donation-card';
 import { NewProfilesCarousel } from '@/components/shared/new-profiles-carousel';
 import { GuidanceVideosCarousel } from '@/components/shared/guidance-videos-carousel';
+import { Link } from '@i18n/navigation';
 
 export default function Home() {
   const t = useTranslations('HomePage');
@@ -40,7 +41,7 @@ export default function Home() {
               <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90" asChild id="create-profile-button">
                 <Link href="/register">{t('createProfile')}</Link>
               </Button>
-              <Button size="lg" variant="secondary" className="bg-secondary/90 text-secondary-foreground hover:bg-secondary/100 md:bg-white/90 md:hover:bg-white" asChild id="browse-profiles-button">
+              <Button size="lg" variant="secondary" className="dark:bg-white/90 dark:text-black dark:hover:bg-white" asChild id="browse-profiles-button">
                  <Link href="/profiles">{t('browseProfiles')}</Link>
               </Button>
             </div>

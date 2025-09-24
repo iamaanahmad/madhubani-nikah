@@ -23,7 +23,7 @@ import { MADHUBANI_CONFIG } from '@/lib/appwrite-config';
 import { toast } from 'sonner';
 
 export default function RegisterPage() {
-  const t = useTranslations('Buttons');
+  const t = useTranslations('RegisterForm');
   const router = useRouter();
   const { register } = useAuth();
   const { createProfile } = useProfileCreation();
@@ -61,12 +61,12 @@ export default function RegisterPage() {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error(t('passwordsDoNotMatch'));
       return;
     }
 
     if (formData.password.length < 8) {
-      toast.error('Password must be at least 8 characters long');
+      toast.error(t('passwordLengthError'));
       return;
     }
 
@@ -82,7 +82,7 @@ export default function RegisterPage() {
       const authResult = await register(formData.email, formData.password, formData.name);
       
       if (!authResult.success || !authResult.user) {
-        throw new Error('Registration failed');
+        throw new Error(t('registrationFailed'));
       }
 
       // Create profile
@@ -105,10 +105,10 @@ export default function RegisterPage() {
 
       await createProfile(authResult.user.$id, profileData);
       
-      toast.success('Account created successfully!');
+      toast.success(t('accountCreatedSuccess'));
       router.push('/');
     } catch (error: any) {
-      toast.error(error.message || 'Registration failed');
+      toast.error(error.message || t('registrationFailed'));
     } finally {
       setLoading(false);
     }
@@ -121,42 +121,39 @@ export default function RegisterPage() {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2 font-headline text-3xl">
               <UserPlus className="h-8 w-8" />
-              {step === 1 ? 'Create Your Account' : 'Complete Your Profile'}
+              {step === 1 ? t('titleStep1') : t('titleStep2')}
             </CardTitle>
             <CardDescription>
-              {step === 1 
-                ? 'Join our community for free to find your life partner.'
-                : 'Tell us about yourself to help find compatible matches.'
-              }
+              {step === 1 ? t('descriptionStep1') : t('descriptionStep2')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             {step === 1 ? (
               <form onSubmit={handleAccountSubmit} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
+                  <Label htmlFor="name">{t('fullNameLabel')}</Label>
                   <Input 
                     id="name" 
                     type="text" 
-                    placeholder="Your Name"
+                    placeholder={t('fullNamePlaceholder')}
                     value={formData.name}
                     onChange={(e) => handleInputChange('name', e.target.value)}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t('emailLabel')}</Label>
                   <Input 
                     id="email" 
                     type="email" 
-                    placeholder="m@example.com"
+                    placeholder={t('emailPlaceholder')}
                     value={formData.email}
                     onChange={(e) => handleInputChange('email', e.target.value)}
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t('passwordLabel')}</Label>
                   <Input 
                     id="password" 
                     type="password"
@@ -167,7 +164,7 @@ export default function RegisterPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirm Password</Label>
+                  <Label htmlFor="confirm-password">{t('confirmPasswordLabel')}</Label>
                   <Input 
                     id="confirm-password" 
                     type="password"
@@ -176,13 +173,13 @@ export default function RegisterPage() {
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full">Continue to Profile</Button>
+                <Button type="submit" className="w-full">{t('continueButton')}</Button>
               </form>
             ) : (
               <form onSubmit={handleProfileSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                    <Label htmlFor="dateOfBirth">{t('dobLabel')}</Label>
                     <Input 
                       id="dateOfBirth" 
                       type="date"
@@ -192,14 +189,14 @@ export default function RegisterPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="gender">Gender</Label>
+                    <Label htmlFor="gender">{t('genderLabel')}</Label>
                     <Select value={formData.gender} onValueChange={(value) => handleInputChange('gender', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select gender" />
+                        <SelectValue placeholder={t('genderPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="male">Male</SelectItem>
-                        <SelectItem value="female">Female</SelectItem>
+                        <SelectItem value="male">{t('genderMale')}</SelectItem>
+                        <SelectItem value="female">{t('genderFemale')}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -207,10 +204,10 @@ export default function RegisterPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="district">District</Label>
+                    <Label htmlFor="district">{t('districtLabel')}</Label>
                     <Select value={formData.district} onValueChange={(value) => handleInputChange('district', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select district" />
+                        <SelectValue placeholder={t('districtPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
                         {MADHUBANI_CONFIG.DISTRICTS.map(district => (
@@ -220,10 +217,10 @@ export default function RegisterPage() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="block">Block</Label>
+                    <Label htmlFor="block">{t('blockLabel')}</Label>
                     <Select value={formData.block} onValueChange={(value) => handleInputChange('block', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select block" />
+                        <SelectValue placeholder={t('blockPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
                         {MADHUBANI_CONFIG.BLOCKS.map(block => (
@@ -235,11 +232,11 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="village">Village (Optional)</Label>
+                  <Label htmlFor="village">{t('villageLabel')}</Label>
                   <Input 
                     id="village" 
                     type="text" 
-                    placeholder="Your village"
+                    placeholder={t('villagePlaceholder')}
                     value={formData.village}
                     onChange={(e) => handleInputChange('village', e.target.value)}
                   />
@@ -247,10 +244,10 @@ export default function RegisterPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="education">Education</Label>
+                    <Label htmlFor="education">{t('educationLabel')}</Label>
                     <Select value={formData.education} onValueChange={(value) => handleInputChange('education', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select education" />
+                        <SelectValue placeholder={t('educationPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
                         {MADHUBANI_CONFIG.EDUCATION_LEVELS.map(edu => (
@@ -260,10 +257,10 @@ export default function RegisterPage() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="occupation">Occupation</Label>
+                    <Label htmlFor="occupation">{t('occupationLabel')}</Label>
                     <Select value={formData.occupation} onValueChange={(value) => handleInputChange('occupation', value)}>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select occupation" />
+                        <SelectValue placeholder={t('occupationPlaceholder')} />
                       </SelectTrigger>
                       <SelectContent>
                         {MADHUBANI_CONFIG.OCCUPATIONS.map(occ => (
@@ -275,10 +272,10 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="sect">Sect</Label>
+                  <Label htmlFor="sect">{t('sectLabel')}</Label>
                   <Select value={formData.sect} onValueChange={(value) => handleInputChange('sect', value)}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select sect" />
+                      <SelectValue placeholder={t('sectPlaceholder')} />
                     </SelectTrigger>
                     <SelectContent>
                       {MADHUBANI_CONFIG.SECTS.map(sect => (
@@ -289,11 +286,11 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="religiousPractice">Religious Practice</Label>
+                  <Label htmlFor="religiousPractice">{t('religiousPracticeLabel')}</Label>
                   <Input 
                     id="religiousPractice" 
                     type="text" 
-                    placeholder="e.g., Prays 5 times a day, Fasts in Ramadan"
+                    placeholder={t('religiousPracticePlaceholder')}
                     value={formData.religiousPractice}
                     onChange={(e) => handleInputChange('religiousPractice', e.target.value)}
                     required
@@ -301,10 +298,10 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="familyBackground">Family Background</Label>
+                  <Label htmlFor="familyBackground">{t('familyBackgroundLabel')}</Label>
                   <Textarea 
                     id="familyBackground" 
-                    placeholder="Tell us about your family background (minimum 20 characters)"
+                    placeholder={t('familyBackgroundPlaceholder')}
                     value={formData.familyBackground}
                     onChange={(e) => handleInputChange('familyBackground', e.target.value)}
                     required
@@ -313,10 +310,10 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="bio">About Yourself</Label>
+                  <Label htmlFor="bio">{t('bioLabel')}</Label>
                   <Textarea 
                     id="bio" 
-                    placeholder="Tell us about yourself, your interests, and what you're looking for (minimum 50 characters)"
+                    placeholder={t('bioPlaceholder')}
                     value={formData.bio}
                     onChange={(e) => handleInputChange('bio', e.target.value)}
                     required
@@ -326,16 +323,16 @@ export default function RegisterPage() {
 
                 <div className="flex gap-4">
                   <Button type="button" variant="outline" onClick={() => setStep(1)} className="w-full">
-                    Back
+                    {t('backButton')}
                   </Button>
                   <Button type="submit" className="w-full" disabled={loading}>
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Creating Account...
+                        {t('creatingAccount')}
                       </>
                     ) : (
-                      t('createAccount')
+                      t('createAccountButton')
                     )}
                   </Button>
                 </div>
@@ -343,9 +340,9 @@ export default function RegisterPage() {
             )}
             
             <div className="mt-4 text-center text-sm">
-              Already have an account?{' '}
+              {t('alreadyHaveAccount')}{' '}
               <Button variant="link" className="p-0" asChild>
-                <Link href="/login">Login</Link>
+                <Link href="/login">{t('loginLink')}</Link>
               </Button>
             </div>
           </CardContent>

@@ -20,7 +20,7 @@ import { useAuth } from '@/components/providers/auth-provider';
 import { toast } from 'sonner';
 
 export default function LoginPage() {
-  const t = useTranslations('Buttons');
+  const t = useTranslations('LoginForm');
   const router = useRouter();
   const { login, loading } = useAuth();
   
@@ -38,20 +38,20 @@ export default function LoginPage() {
     e.preventDefault();
     
     if (!formData.email || !formData.password) {
-      toast.error('Please fill in all fields');
+      toast.error(t('allFieldsRequired'));
       return;
     }
 
     try {
       const result = await login(formData.email, formData.password);
       if (result.success) {
-        toast.success('Login successful!');
+        toast.success(t('loginSuccess'));
         router.push('/');
       } else {
-        toast.error(result.error || 'Login failed');
+        toast.error(result.error || t('loginFailed'));
       }
     } catch (error: any) {
-      toast.error(error.message || 'Login failed');
+      toast.error(error.message || t('loginFailed'));
     }
   };
 
@@ -59,12 +59,12 @@ export default function LoginPage() {
     e.preventDefault();
     
     if (!formData.phone) {
-      toast.error('Please enter your phone number');
+      toast.error(t('phoneRequired'));
       return;
     }
 
     // TODO: Implement phone/OTP login
-    toast.info('Phone login will be implemented soon');
+    toast.info(t('phoneLoginSoon'));
   };
 
   return (
@@ -74,33 +74,33 @@ export default function LoginPage() {
           <CardHeader className="text-center">
             <CardTitle className="flex items-center justify-center gap-2 font-headline text-3xl">
               <LogIn className="h-8 w-8" />
-              Login to Your Account
+              {t('title')}
             </CardTitle>
             <CardDescription>
-              Welcome back! Please enter your details.
+              {t('description')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="email">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="email">Email & Password</TabsTrigger>
-                <TabsTrigger value="otp">Mobile OTP</TabsTrigger>
+                <TabsTrigger value="email">{t('emailTab')}</TabsTrigger>
+                <TabsTrigger value="otp">{t('mobileTab')}</TabsTrigger>
               </TabsList>
               <TabsContent value="email">
                 <form onSubmit={handleEmailLogin} className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
+                    <Label htmlFor="email">{t('emailLabel')}</Label>
                     <Input 
                       id="email" 
                       type="email" 
-                      placeholder="m@example.com"
+                      placeholder={t('emailPlaceholder')}
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       required
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">{t('passwordLabel')}</Label>
                     <Input 
                       id="password" 
                       type="password"
@@ -113,25 +113,25 @@ export default function LoginPage() {
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Logging in...
+                        {t('loggingIn')}
                       </>
                     ) : (
-                      t('login')
+                      t('loginButton')
                     )}
                   </Button>
                   <Button variant="link" className="w-full text-sm" type="button">
-                    Forgot password?
+                    {t('forgotPassword')}
                   </Button>
                 </form>
               </TabsContent>
               <TabsContent value="otp">
                 <form onSubmit={handlePhoneLogin} className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Mobile Number</Label>
+                    <Label htmlFor="phone">{t('mobileLabel')}</Label>
                     <Input 
                       id="phone" 
                       type="tel" 
-                      placeholder="+91 XXXXX XXXXX"
+                      placeholder={t('mobilePlaceholder')}
                       value={formData.phone}
                       onChange={(e) => handleInputChange('phone', e.target.value)}
                       required
@@ -141,22 +141,22 @@ export default function LoginPage() {
                     {loading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Sending OTP...
+                        {t('sendingOTP')}
                       </>
                     ) : (
-                      'Send OTP'
+                      t('sendOTPButton')
                     )}
                   </Button>
                   <p className="text-center text-xs text-muted-foreground">
-                    You will receive a one-time password on your mobile.
+                    {t('otpMessage')}
                   </p>
                 </form>
               </TabsContent>
             </Tabs>
             <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{' '}
+              {t('noAccount')}{' '}
               <Button variant="link" className="p-0" asChild>
-                <Link href="/register">Sign up</Link>
+                <Link href="/register">{t('signUpLink')}</Link>
               </Button>
             </div>
           </CardContent>
