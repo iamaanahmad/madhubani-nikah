@@ -7,19 +7,20 @@
 @layer base {
   :root {
     --font-size-base: 16px;
-    --background: 60 56% 91%;
+    /* Updated Theme Colors */
+    --background: 60 56% 91%; /* Soft Beige */
     --foreground: 20 10% 20%;
-    --card: 60 56% 93%;
+    --card: 60 56% 93%; /* Slightly adjusted for card background */
     --card-foreground: 20 10% 20%;
     --popover: 60 56% 91%;
     --popover-foreground: 20 10% 20%;
-    --primary: 145 53% 55%;
+    --primary: 145 53% 55%; /* Emerald Green */
     --primary-foreground: 0 0% 100%;
     --secondary: 60 20% 85%;
     --secondary-foreground: 20 10% 20%;
     --muted: 60 20% 88%;
     --muted-foreground: 20 10% 40%;
-    --accent: 51 57% 50%;
+    --accent: 51 57% 50%; /* Muted Gold */
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -30,16 +31,6 @@
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
-  }
-}
-
-/* Arabic Font Styling */
-
-.font-arabic {
-  font-family: 'Amiri', 'Times New Roman', serif;
-  direction: rtl;
-  text-align: right;
-  line-height: 1.8;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
@@ -52,6 +43,7 @@
     --sidebar-border: 60 20% 88%;
     --sidebar-ring: 145 53% 55%;
   }
+
   .dark {
     --background: 20 10% 10%;
     --foreground: 60 56% 91%;
@@ -87,6 +79,7 @@
     --sidebar-border: 20 10% 25%;
     --sidebar-ring: 145 53% 55%;
   }
+}
 
 @layer base {
   * {
@@ -94,8 +87,17 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "liga" 1, "calt" 1;
   }
   html {
     font-size: var(--font-size-base);
   }
+}
+
+/* Arabic Font Styling */
+.font-arabic {
+  font-family: 'Amiri', 'Times New Roman', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
 }

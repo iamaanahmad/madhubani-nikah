@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from '@i18n/navigation';
+import { Link } from 'next-intl/navigation';
 import {
   Card,
   CardContent,
@@ -54,7 +54,7 @@ export function MatchCard({
   const profileLink = `/profile/${profile.$id || profile.userId}`;
 
   const ImageContent = () => (
-    <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden">
+    <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden group-hover:scale-105 transition-transform duration-300">
       {showPhoto ? (
         <Image
           src={profile.profilePictureUrl!}
@@ -74,18 +74,20 @@ export function MatchCard({
   );
 
   const cardContent = (
-    <Card className="flex flex-col overflow-hidden transition-all hover:shadow-lg h-full">
+    <Card className="flex flex-col overflow-hidden transition-all duration-300 hover:shadow-2xl h-full group">
       <CardHeader className="relative p-0">
-        {preview ? (
-            <div className="block aspect-square w-full">
-              <ImageContent />
-            </div>
-        ) : (
-            <Link href={profileLink} className="block aspect-square w-full">
-              <ImageContent />
-            </Link>
-        )}
-        <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
+        <div className="block aspect-square w-full overflow-hidden rounded-t-lg">
+          {preview ? (
+              <div className="block aspect-square w-full">
+                <ImageContent />
+              </div>
+          ) : (
+              <Link href={profileLink} className="block aspect-square w-full">
+                <ImageContent />
+              </Link>
+          )}
+        </div>
+        <div className="absolute bottom-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 text-white">
            <CardTitle className="flex items-center gap-2 font-headline text-2xl">
             {preview ? (
               <span>
@@ -143,8 +145,8 @@ export function MatchCard({
         </div>
       </CardContent>
       {!preview && isLoggedIn && (
-        <CardFooter className="flex gap-2 bg-muted/50 p-4">
-          <Button className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+        <CardFooter className="flex gap-2 bg-muted/50 p-4 border-t">
+          <Button className="w-full">
             <Heart className="mr-2" /> Propose
           </Button>
           <Button variant="outline" className="w-full" asChild>
@@ -153,7 +155,7 @@ export function MatchCard({
         </CardFooter>
       )}
       {!isLoggedIn && !preview && (
-         <CardFooter className="flex bg-muted/50 p-4">
+         <CardFooter className="flex bg-muted/50 p-4 border-t">
             <AlertDialog>
                 <AlertDialogTrigger asChild>
                     <Button variant="outline" className="w-full">View Profile</Button>
