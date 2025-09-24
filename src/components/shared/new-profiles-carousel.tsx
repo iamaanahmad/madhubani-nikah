@@ -6,13 +6,37 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { mockMatches } from '@/lib/data';
 import { MatchCard } from '../matches/match-card';
+import { useProfileSearch } from '@/hooks/useProfile';
+import { useAuth } from '@/components/providers/auth-provider';
+import { useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
 
 export function NewProfilesCarousel() {
-  const newMatches = mockMatches.slice(0, 8);
-  // TODO: Replace with real auth state from a context
-  const isLoggedIn = true;
+  const { user } = useAuth();
+  const { results, loading, searchProfiles } = useProfileSearch();
+  
+  useEffect(() => {
+    // Fetch recent profiles
+    searchProfiles({
+      limit: 8,
+      isActive: true
+    });
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-12">
+        <div className="flex items-center gap-2">
+          <Loader2 className="h-6 w-6 animate-spin" />
+          <span>Loading new profiles...</span>
+        </div>
+      </div>
+    );
+  }
+
+  const newMatches = results.profiles.slice(0, 8);
+  const isLoggedIn = !!user;
   return (
     <Carousel
       opts={{
@@ -24,7 +48,7 @@ export function NewProfilesCarousel() {
       <CarouselContent className="-ml-2">
         {newMatches.map((match) => (
           <CarouselItem
-            key={match.id}
+            key={match.$id || match.userId}
             className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 pl-2"
           >
             <div className="p-1">

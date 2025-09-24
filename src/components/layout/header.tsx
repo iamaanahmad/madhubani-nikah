@@ -22,21 +22,35 @@ import {
 } from 'lucide-react';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { Logo } from '@/components/shared/logo';
-import { currentUser } from '@/lib/data';
 import { navLinks } from './nav-links';
 import { Link, usePathname, useRouter } from '@i18n/navigation';
 import { useLocale, useTranslations } from 'next-intl';
+import { useAuth } from '@/components/providers/auth-provider';
+import { useProfile } from '@/hooks/useProfile';
+import { toast } from 'sonner';
 
 export function AppHeader() {
   const t = useTranslations('Header');
-  // TODO: Replace with real auth state
-  const loggedIn = true;
+  const { user, logout } = useAuth();
+  const { profile } = useProfile(user?.$id);
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
+  
+  const loggedIn = !!user;
 
   const handleLanguageChange = (newLocale: string) => {
     router.replace(pathname, {locale: newLocale});
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      toast.success('Logged out successfully');
+      router.push('/');
+    } catch (error: any) {
+      toast.error(error.message || 'Logout failed');
+    }
   };
 
   const translatedNavLinks = navLinks.map(link => ({
@@ -85,12 +99,11 @@ export function AppHeader() {
               <Button variant="ghost" className="relative h-9 w-9 rounded-full">
                 <Avatar className="h-9 w-9 border">
                   <AvatarImage
-                    src={currentUser.profilePicture.url}
-                    alt={currentUser.name}
-                    data-ai-hint={currentUser.profilePicture.hint}
+                    src={profile?.profilePictureUrl}
+                    alt={user?.name || 'User'}
                   />
                   <AvatarFallback>
-                    {currentUser.name.charAt(0)}
+                    {(user?.name || profile?.name || 'U').charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
               </Button>
@@ -99,16 +112,16 @@ export function AppHeader() {
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
                   <p className="text-sm font-medium leading-none">
-                    {currentUser.name}
+                    {user?.name || profile?.name || 'User'}
                   </p>
                   <p className="text-xs leading-none text-muted-foreground">
-                    {currentUser.email}
+                    {user?.email}
                   </p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href={`/profile/${currentUser.id.replace('user-', '')}`}>
+                <Link href={`/profile/${profile?.$id || user?.$id}`}>
                     <User className="mr-2" />
                     <span>My Profile</span>
                 </Link>
@@ -126,7 +139,7 @@ export function AppHeader() {
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem onClick={handleLogout}>
                 <LogOut className="mr-2" />
                 <span>Log out</span>
               </DropdownMenuItem>

@@ -1,9 +1,33 @@
+'use client';
+import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen } from 'lucide-react';
-import { islamicContent } from '@/lib/data';
+import { BookOpen, Loader2 } from 'lucide-react';
+import { IslamicContentService, type IslamicContent } from '@/lib/services/islamic-content.service';
 import MainLayout from '@/components/layout/main-layout';
 
 export default function GuidancePage() {
+  const [islamicContent, setIslamicContent] = React.useState<IslamicContent[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const loadContent = async () => {
+      try {
+        setIsLoading(true);
+        const content = await IslamicContentService.getActiveContent();
+        setIslamicContent(content);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load Islamic content:', err);
+        setError('Failed to load content');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
+
   return (
     <MainLayout>
       <div className="container mx-auto p-4 md:p-8">
@@ -15,14 +39,28 @@ export default function GuidancePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {islamicContent.map((item) => (
-              <blockquote key={item.id} className="border-l-4 border-primary pl-4 py-2">
+            {isLoading && (
+              <div className="flex items-center justify-center py-8">
+                <Loader2 className="h-6 w-6 animate-spin" />
+                <span className="ml-2">Loading Islamic content...</span>
+              </div>
+            )}
+            
+            {error && (
+              <div className="text-center py-8">
+                <p className="text-muted-foreground">{error}</p>
+              </div>
+            )}
+            
+            {!isLoading && !error && islamicContent.map((item) => (
+              <blockquote key={item.$id} className="border-l-4 border-primary pl-4 py-2">
                   <p className="font-headline text-xl italic leading-relaxed md:text-2xl">
-                    &ldquo;{item.text}&rdquo;
+                    &ldquo;{item.englishText}&rdquo;
                   </p>
                   <footer className="mt-2 text-sm text-muted-foreground">- {item.source} ({item.type})</footer>
                 </blockquote>
             ))}
+            
             <div className="prose dark:prose-invert max-w-none font-body pt-6">
                 <h3>The Importance of Nikah</h3>
                 <p>

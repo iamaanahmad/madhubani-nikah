@@ -25,7 +25,7 @@ import {
   EyeOff,
 } from 'lucide-react';
 import { VerifiedBadge } from '@/components/profile/verified-badge';
-import type { UserProfile } from '@/lib/types';
+import type { Profile } from '@/lib/services/profile.service';
 import { SmartMatchExplainer } from './smart-match-explainer';
 import {
   AlertDialog,
@@ -40,7 +40,7 @@ import {
 } from '@/components/ui/alert-dialog';
 
 type MatchCardProps = {
-  profile: UserProfile;
+  profile: Profile;
   preview?: boolean;
   isLoggedIn?: boolean;
 };
@@ -50,17 +50,16 @@ export function MatchCard({
   preview = false,
   isLoggedIn = false,
 }: MatchCardProps) {
-  const showPhoto = isLoggedIn && !profile.isPhotoBlurred;
-  const profileLink = `/profile/${profile.id.replace('user-', '')}`;
+  const showPhoto = isLoggedIn && !profile.isPhotoBlurred && profile.profilePictureUrl;
+  const profileLink = `/profile/${profile.$id || profile.userId}`;
 
   const ImageContent = () => (
     <div className="aspect-square w-full bg-muted flex items-center justify-center relative rounded-t-lg overflow-hidden">
       {showPhoto ? (
         <Image
-          src={profile.profilePicture.url}
+          src={profile.profilePictureUrl!}
           alt={profile.name}
           fill
-          data-ai-hint={profile.profilePicture.hint}
           className="object-cover"
         />
       ) : (
@@ -131,7 +130,7 @@ export function MatchCard({
         <div className="space-y-3 text-sm text-muted-foreground">
           <div className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-            <span>From {profile.village}</span>
+            <span>From {profile.village || profile.block}, {profile.district}</span>
           </div>
           <div className="flex items-start gap-2">
             <BookText className="mt-0.5 h-4 w-4 shrink-0" />

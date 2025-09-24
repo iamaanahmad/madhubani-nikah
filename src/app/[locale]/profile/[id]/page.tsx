@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import {
   Card,
@@ -20,30 +22,81 @@ import {
   Tag,
   User,
   Users,
+  Loader2,
 } from 'lucide-react';
-import { mockMatches, currentUser } from '@/lib/data';
 import { VerifiedBadge } from '@/components/profile/verified-badge';
 import MainLayout from '@/components/layout/main-layout';
 import { Separator } from '@/components/ui/separator';
 import { EyeOff } from 'lucide-react';
+import { useProfile } from '@/hooks/useProfile';
+import { useAuth } from '@/components/providers/auth-provider';
+import { useEffect, useState } from 'react';
+import { ProfileService } from '@/lib/services/profile.service';
 
 export default function ProfilePage({ params }: { params: { id: string } }) {
-  const profile = [...mockMatches, currentUser].find(
-    (p) => p.id === `user-${params.id}`
-  );
+  const { user: currentUser } = useAuth();
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  if (!profile) {
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        
+        // Try to get profile by document ID first
+        let profileData = await ProfileService.getProfileById(params.id);
+        
+        // If not found by document ID, try to find by user ID
+        if (!profileData) {
+          profileData = await ProfileService.getProfile(params.id);
+        }
+        
+        if (profileData) {
+          setProfile(profileData);
+          // Increment view count if viewing someone else's profile
+          if (currentUser && profileData.userId !== currentUser.$id) {
+            await ProfileService.incrementViewCount(profileData.$id!);
+          }
+        } else {
+          setError('Profile not found');
+        }
+      } catch (err: any) {
+        setError(err.message || 'Failed to load profile');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [params.id, currentUser]);
+
+  if (loading) {
+    return (
+      <MainLayout>
+        <div className="container mx-auto p-8 flex items-center justify-center min-h-[50vh]">
+          <div className="flex items-center gap-2">
+            <Loader2 className="h-6 w-6 animate-spin" />
+            <span>Loading profile...</span>
+          </div>
+        </div>
+      </MainLayout>
+    );
+  }
+
+  if (error || !profile) {
     return (
       <MainLayout>
         <div className="container mx-auto p-8 text-center">
-          Profile not found.
+          <p className="text-muted-foreground">{error || 'Profile not found.'}</p>
         </div>
       </MainLayout>
     );
   }
 
   // A logged-in user can see their own photo even if blurred
-  const isLoggedInUser = profile.id === currentUser.id;
+  const isLoggedInUser = currentUser && profile.userId === currentUser.$id;
   const showPhoto = !profile.isPhotoBlurred || isLoggedInUser;
 
   return (
@@ -55,18 +108,19 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
             <Card>
               <CardHeader className="p-0">
                 <div className="aspect-square w-full relative bg-muted rounded-t-lg">
-                  {showPhoto ? (
+                  {showPhoto && profile.profilePictureUrl ? (
                     <Image
-                      src={profile.profilePicture.url}
+                      src={profile.profilePictureUrl}
                       alt={profile.name}
                       fill
                       className="object-cover rounded-t-lg"
-                      data-ai-hint={profile.profilePicture.hint}
                     />
                   ) : (
                     <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
                         <EyeOff className="h-16 w-16" />
-                        <p className="mt-2 text-sm">Photo is private</p>
+                        <p className="mt-2 text-sm">
+                          {profile.profilePictureUrl ? 'Photo is private' : 'No photo uploaded'}
+                        </p>
                     </div>
                   )}
                 </div>
@@ -79,7 +133,7 @@ export default function ProfilePage({ params }: { params: { id: string } }) {
                   {profile.isVerified && <VerifiedBadge />}
                 </CardTitle>
                 <CardDescription className="flex items-center gap-2 mt-1">
-                  <MapPin className="h-4 w-4" /> {profile.village}
+                  <MapPin className="h-4 w-4" /> {profile.village || profile.block}, {profile.district}
                 </CardDescription>
                  <CardDescription className="flex items-center gap-2 mt-1 capitalize">
                   <Users className="h-4 w-4" /> {profile.gender}
