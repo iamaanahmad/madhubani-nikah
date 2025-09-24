@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight, BookOpen, Pause, Play } from 'lucide-react';
 import { type IslamicContent } from '@/lib/services/islamic-content.service';
 import { cn } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface IslamicContentCarouselProps {
   className?: string;
@@ -22,6 +23,7 @@ export function IslamicContentCarousel({
   showControls = true,
   showIndicators = true,
 }: IslamicContentCarouselProps) {
+  const t = useTranslations('Quotes');
   const [content, setContent] = React.useState<IslamicContent[]>([]);
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -30,16 +32,15 @@ export function IslamicContentCarousel({
   const [isHovered, setIsHovered] = React.useState(false);
   const intervalRef = React.useRef<NodeJS.Timeout | null>(null);
 
-  // Load Islamic content - using static data for simplicity
   React.useEffect(() => {
     setIsLoading(true);
     
-    // Static Islamic quotes and hadiths
     const staticContent = [
       {
         $id: 'static-1',
         type: 'Hadith',
         source: 'Mishkat al-Masabih',
+        textKey: 'hadith1',
         englishText: 'When a person marries, he has fulfilled half of his religion.',
         attribution: 'Prophet Muhammad (Peace be upon him)',
         isActive: true,
@@ -51,6 +52,7 @@ export function IslamicContentCarousel({
         $id: 'static-2',
         type: 'Hadith',
         source: 'Al-Bukhari',
+        textKey: 'hadith2',
         englishText: 'O young people! Those among you who can support a wife should marry, for it helps him lower his gaze and guard his modesty.',
         attribution: 'Prophet Muhammad (Peace be upon him)',
         isActive: true,
@@ -62,6 +64,7 @@ export function IslamicContentCarousel({
         $id: 'static-3',
         type: 'Quran',
         source: 'Surah Ar-Rum (30:21)',
+        textKey: 'quran1',
         englishText: 'And among His signs is this: that He created for you mates from among yourselves, that you may dwell in tranquility with them, and He has put love and mercy between your hearts.',
         attribution: 'Allah (SWT)',
         isActive: true,
@@ -73,6 +76,7 @@ export function IslamicContentCarousel({
         $id: 'static-4',
         type: 'Quran',
         source: 'Surah An-Nur (24:32)',
+        textKey: 'quran2',
         englishText: 'And marry the unmarried among you and the righteous among your male slaves and female slaves.',
         attribution: 'Allah (SWT)',
         isActive: true,
@@ -84,6 +88,7 @@ export function IslamicContentCarousel({
         $id: 'static-5',
         type: 'Hadith',
         source: 'Ibn Majah',
+        textKey: 'hadith3',
         englishText: 'Marriage is part of my Sunnah. Whoever does not follow my Sunnah has nothing to do with me.',
         attribution: 'Prophet Muhammad (Peace be upon him)',
         isActive: true,
@@ -95,6 +100,7 @@ export function IslamicContentCarousel({
         $id: 'static-6',
         type: 'Quote',
         source: 'Islamic Teaching',
+        textKey: 'wisdom1',
         englishText: 'Nikah is not just a contract; it is a sacred bond founded on love, respect, and commitment in Islam.',
         attribution: 'Islamic Wisdom',
         isActive: true,
@@ -109,7 +115,6 @@ export function IslamicContentCarousel({
     setIsLoading(false);
   }, []);
 
-  // Auto-play functionality
   React.useEffect(() => {
     if (!autoPlay || isPaused || isHovered || content.length <= 1) {
       if (intervalRef.current) {
@@ -185,7 +190,6 @@ export function IslamicContentCarousel({
       onMouseLeave={() => setIsHovered(false)}
     >
       <CardContent className="p-8">
-        {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-2">
             <BookOpen className="h-6 w-6 text-primary" />
@@ -207,9 +211,7 @@ export function IslamicContentCarousel({
           )}
         </div>
 
-        {/* Content */}
         <div className="min-h-[200px] flex flex-col justify-center">
-          {/* Arabic Text (if available) */}
           {currentContent.arabicText && (
             <div className="text-right mb-4">
               <p className="text-2xl font-arabic leading-relaxed text-primary/80">
@@ -218,14 +220,12 @@ export function IslamicContentCarousel({
             </div>
           )}
 
-          {/* English Text */}
           <blockquote className="border-l-4 border-primary pl-6 mb-6">
             <p className="text-xl md:text-2xl font-headline italic leading-relaxed text-foreground">
-              &ldquo;{currentContent.englishText}&rdquo;
+              &ldquo;{t(currentContent.textKey as any)}&rdquo;
             </p>
           </blockquote>
 
-          {/* Attribution */}
           <div className="text-right">
             <p className="text-sm text-muted-foreground mb-1">
               — {currentContent.attribution || 'Islamic Teaching'}
@@ -236,7 +236,6 @@ export function IslamicContentCarousel({
           </div>
         </div>
 
-        {/* Navigation Controls */}
         {showControls && content.length > 1 && (
           <div className="flex items-center justify-between mt-6">
             <Button
@@ -249,7 +248,6 @@ export function IslamicContentCarousel({
               <span className="sr-only">Previous</span>
             </Button>
 
-            {/* Slide Counter */}
             <span className="text-sm text-muted-foreground">
               {currentIndex + 1} of {content.length}
             </span>
@@ -266,7 +264,6 @@ export function IslamicContentCarousel({
           </div>
         )}
 
-        {/* Indicators */}
         {showIndicators && content.length > 1 && (
           <div className="flex justify-center mt-4 space-x-2">
             {content.map((_, index) => (
@@ -286,7 +283,6 @@ export function IslamicContentCarousel({
         )}
       </CardContent>
 
-      {/* Progress Bar (for auto-play) */}
       {autoPlay && !isPaused && !isHovered && content.length > 1 && (
         <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary/20">
           <div 
