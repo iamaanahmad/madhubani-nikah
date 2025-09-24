@@ -4,8 +4,10 @@ import { AppwriteUtils } from '../appwrite-utils';
 
 // Types for authentication
 export interface AuthResult {
-  user: Models.User<Models.Preferences>;
-  session: Models.Session;
+  success: boolean;
+  user?: Models.User<Models.Preferences>;
+  session?: Models.Session;
+  error?: string;
 }
 
 export interface OTPResult {
@@ -35,26 +37,26 @@ export class AuthService {
   /**
    * Register user with email and password
    */
-  static async registerWithEmail(data: RegisterData): Promise<AuthResult> {
+  static async registerWithEmail(email: string, password: string, name: string): Promise<AuthResult> {
     return AppwriteService.executeWithErrorHandling(async () => {
       // Validate input
-      if (!AppwriteUtils.isValidEmail(data.email)) {
+      if (!AppwriteUtils.isValidEmail(email)) {
         throw new Error('Invalid email format');
       }
 
-      if (data.password.length < 8) {
+      if (password.length < 8) {
         throw new Error('Password must be at least 8 characters long');
       }
 
-      if (data.name.trim().length < 2) {
+      if (name.trim().length < 2) {
         throw new Error('Name must be at least 2 characters long');
       }
 
       // Sanitize input
       const sanitizedData = {
-        email: data.email.toLowerCase().trim(),
-        password: data.password,
-        name: AppwriteUtils.sanitizeInput(data.name)
+        email: email.toLowerCase().trim(),
+        password: password,
+        name: AppwriteUtils.sanitizeInput(name)
       };
 
       // Create user account
@@ -71,7 +73,7 @@ export class AuthService {
         sanitizedData.password
       );
 
-      return { user, session };
+      return { success: true, user, session };
     }, 'registerWithEmail');
   }
 
@@ -93,7 +95,7 @@ export class AuthService {
       // Get user details
       const user = await account.get();
 
-      return { user, session };
+      return { success: true, user, session };
     }, 'loginWithEmail');
   }
 
@@ -141,7 +143,7 @@ export class AuthService {
       // Get user details
       const user = await account.get();
 
-      return { user, session };
+      return { success: true, user, session };
     }, 'verifyPhoneOTP');
   }
 

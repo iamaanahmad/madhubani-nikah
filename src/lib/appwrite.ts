@@ -53,15 +53,10 @@ export class AppwriteService {
     try {
       return await operation();
     } catch (error) {
-      const handledError = AppwriteErrorHandler.handleError(error as AppwriteException);
+      const handledError = AppwriteErrorHandler.handleError(error as any);
       
       // Log error for debugging
-      console.error(`Appwrite operation failed${context ? ` (${context})` : ''}:`, {
-        type: handledError.type,
-        message: handledError.message,
-        code: handledError.code,
-        details: handledError.details
-      });
+      console.error(`Appwrite operation failed${context ? ` (${context})` : ''}:`, handledError);
 
       throw handledError;
     }

@@ -3,10 +3,17 @@
 import React, { createContext, useContext } from 'react';
 import { useAuthState } from '@/hooks/useAuth';
 import { Models } from 'appwrite';
-import { AuthResult } from '@/lib/services/auth.service';
+
+interface AuthResult {
+  success: boolean;
+  user?: Models.User<Models.Preferences>;
+  session?: Models.Session;
+  error?: string;
+}
 
 interface AuthContextType {
   user: Models.User<Models.Preferences> | null;
+  isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<AuthResult>;

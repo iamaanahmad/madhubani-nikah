@@ -82,7 +82,7 @@ export class AppwriteErrorHandler {
   }
 
   static handleError(
-    error: AppwriteException | Error, 
+    error: any, 
     context?: ErrorContext
   ): AppwriteErrorResponse {
     const errorResponse = error instanceof AppwriteException 
@@ -96,12 +96,16 @@ export class AppwriteErrorHandler {
   }
 
   private static handleGenericError(
-    error: Error, 
+    error: any, 
     context?: ErrorContext
   ): AppwriteErrorResponse {
+    const message = (error && typeof error === 'object' && error.message) 
+      ? error.message 
+      : 'An unknown error occurred';
+      
     return {
       type: AppwriteErrorType.UNKNOWN_ERROR,
-      message: error.message,
+      message,
       userMessage: 'An unexpected error occurred. Please try again.',
       canRetry: true,
       severity: ErrorSeverity.MEDIUM,
@@ -188,7 +192,7 @@ export class AppwriteErrorHandler {
         };
 
       default:
-        if (type === 'storage_invalid_file_size' || type === 'storage_invalid_file') {
+        if (type?.includes('storage_invalid_file_size') || type?.includes('storage_invalid_file')) {
           return {
             type: AppwriteErrorType.STORAGE_ERROR,
             message,
@@ -314,10 +318,10 @@ export class ConsoleErrorLogger implements ErrorLogger {
     console[logLevel]('Appwrite Error:', {
       timestamp: error.timestamp,
       type: error.type,
+      severity: error.severity,
       message: error.message,
       userMessage: error.userMessage,
       code: error.code,
-      severity: error.severity,
       context,
       suggestions: error.suggestions
     });

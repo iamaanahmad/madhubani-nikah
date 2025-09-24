@@ -6,6 +6,7 @@ import { Models } from 'appwrite';
 
 interface AuthContextType {
   user: Models.User<Models.Preferences> | null;
+  isAuthenticated: boolean;
   loading: boolean;
   error: string | null;
   login: (email: string, password: string) => Promise<AuthResult>;
@@ -28,6 +29,8 @@ export function useAuthState() {
   const [user, setUser] = useState<Models.User<Models.Preferences> | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const isAuthenticated = !!user;
 
   const clearError = () => setError(null);
 
@@ -52,10 +55,12 @@ export function useAuthState() {
     setError(null);
     try {
       const result = await AuthService.loginWithEmail(email, password);
-      if (result.success && result.user) {
+      if (result.user) {
         setUser(result.user);
+        return { success: true, user: result.user, session: result.session };
+      } else {
+        throw new Error(result.error || 'Login failed');
       }
-      return result;
     } catch (err: any) {
       const errorMessage = err.message || 'Login failed';
       setError(errorMessage);
@@ -70,10 +75,12 @@ export function useAuthState() {
     setError(null);
     try {
       const result = await AuthService.registerWithEmail(email, password, name);
-      if (result.success && result.user) {
+      if (result.user) {
         setUser(result.user);
+        return { success: true, user: result.user, session: result.session };
+      } else {
+        throw new Error(result.error || 'Registration failed');
       }
-      return result;
     } catch (err: any) {
       const errorMessage = err.message || 'Registration failed';
       setError(errorMessage);
@@ -100,6 +107,7 @@ export function useAuthState() {
 
   return {
     user,
+    isAuthenticated,
     loading,
     error,
     login,
