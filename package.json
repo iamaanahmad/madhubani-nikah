@@ -7,9 +7,26 @@
     "genkit:dev": "genkit start -- tsx src/ai/dev.ts",
     "genkit:watch": "genkit start -- tsx --watch src/ai/dev.ts",
     "build": "next build",
+    "build:production": "NODE_ENV=production npm run build",
     "start": "next start",
+    "start:production": "NODE_ENV=production npm run start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage",
+    "deploy:production": "node scripts/deploy-production.js",
+    "backup:create": "node scripts/backup-recovery.js create",
+    "backup:restore": "node scripts/backup-recovery.js restore",
+    "backup:list": "node scripts/backup-recovery.js list",
+    "backup:cleanup": "node scripts/backup-recovery.js cleanup",
+    "health:check": "node scripts/health-check.js",
+    "security:audit": "npm audit --audit-level=high",
+    "seed:islamic-content": "node scripts/seed-islamic-content.js seed",
+    "clear:islamic-content": "node scripts/seed-islamic-content.js clear",
+    "reset:islamic-content": "node scripts/seed-islamic-content.js reset",
+    "performance:analyze": "npm run build && npx @next/bundle-analyzer"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.7",
@@ -37,6 +54,7 @@
     "@radix-ui/react-tabs": "^1.1.3",
     "@radix-ui/react-toast": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "appwrite": "^20.1.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -55,18 +73,26 @@
     "react-hook-form": "^7.54.2",
     "react-joyride": "^3.0.0-7",
     "recharts": "^2.15.1",
+    "sonner": "^2.0.7",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@vitest/ui": "^3.2.4",
     "genkit-cli": "^1.14.1",
+    "jsdom": "^27.0.0",
+    "node-appwrite": "^19.1.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^3.2.4"
   }
 }

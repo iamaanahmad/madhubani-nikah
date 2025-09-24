@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -28,6 +30,16 @@
     --chart-2: 173 58% 39%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
+  }
+}
+
+/* Arabic Font Styling */
+
+.font-arabic {
+  font-family: 'Amiri', 'Times New Roman', serif;
+  direction: rtl;
+  text-align: right;
+  line-height: 1.8;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
@@ -75,7 +87,6 @@
     --sidebar-border: 20 10% 25%;
     --sidebar-ring: 145 53% 55%;
   }
-}
 
 @layer base {
   * {

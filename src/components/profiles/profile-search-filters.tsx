@@ -15,6 +15,10 @@ import { Separator } from '@/components/ui/separator';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { madhubaniDistrict, nearbyDistricts, getVillagesByBlock } from '@/lib/geographical-data';
 import { mainSects, biradariGroups, getSubSectsBySect } from '@/lib/sect-biradari-data';
+import { SearchAnalyticsService } from '@/lib/services/search-analytics.service';
+import { useAuth } from '@/components/providers/auth-provider';
+import { useEffect, useRef } from 'react';
+import { AppwriteUtils } from '@/lib/appwrite-utils';
 
 export type FilterState = {
   // Basic Filters
@@ -63,14 +67,66 @@ export function ProfileSearchFilters({
   onApplyFilters,
   resultCount 
 }: ProfileSearchFiltersProps) {
+  const { user } = useAuth();
   const [localFilters, setLocalFilters] = useState<FilterState>(filters);
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
+  const [searchSuggestions, setSearchSuggestions] = useState<string[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const sessionId = useRef(SearchAnalyticsService.generateSessionId());
+  
+  // Debounced search function
+  const debouncedSearch = useRef(
+    AppwriteUtils.debounce((query: string, filters: FilterState) => {
+      handleSearch(query, filters);
+    }, 500)
+  ).current;
 
   const updateFilter = (key: keyof FilterState, value: any) => {
     const newFilters = { ...localFilters, [key]: value };
     setLocalFilters(newFilters);
     onFiltersChange(newFilters);
+    
+    // Trigger debounced search for immediate filters
+    if (key === 'searchQuery') {
+      debouncedSearch(value, newFilters);
+    } else {
+      // For other filters, apply immediately
+      handleSearch(newFilters.searchQuery, newFilters);
+    }
   };
+
+  const handleSearch = async (query: string, searchFilters: FilterState) => {
+    try {
+      // Track search analytics
+      if (user) {
+        await SearchAnalyticsService.trackSearch({
+          userId: user.$id,
+          searchQuery: query,
+          filters: searchFilters,
+          resultCount,
+          sessionId: sessionId.current,
+          userAgent: navigator.userAgent
+        });
+      }
+    } catch (error) {
+      console.warn('Failed to track search analytics:', error);
+    }
+  };
+
+  // Load search suggestions
+  useEffect(() => {
+    const loadSuggestions = async () => {
+      try {
+        const popularFilters = await SearchAnalyticsService.getPopularFilters(5);
+        const suggestions = popularFilters.map(f => f.filter.replace(/_/g, ' '));
+        setSearchSuggestions(suggestions);
+      } catch (error) {
+        console.warn('Failed to load search suggestions:', error);
+      }
+    };
+
+    loadSuggestions();
+  }, []);
 
   const clearFilters = () => {
     const defaultFilters: FilterState = {
@@ -137,15 +193,36 @@ export function ProfileSearchFilters({
       </CardHeader>
       
       <CardContent className="space-y-6">
-        {/* Search Bar */}
+        {/* Search Bar with Suggestions */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search by name, location, profession..."
             value={localFilters.searchQuery}
             onChange={(e) => updateFilter('searchQuery', e.target.value)}
+            onFocus={() => setShowSuggestions(true)}
+            onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
             className="pl-10"
           />
+          
+          {/* Search Suggestions Dropdown */}
+          {showSuggestions && searchSuggestions.length > 0 && (
+            <div className="absolute top-full left-0 right-0 z-10 mt-1 bg-background border rounded-md shadow-lg">
+              <div className="p-2 text-xs text-muted-foreground border-b">Popular searches:</div>
+              {searchSuggestions.map((suggestion, index) => (
+                <button
+                  key={index}
+                  className="w-full text-left px-3 py-2 hover:bg-muted text-sm"
+                  onClick={() => {
+                    updateFilter('searchQuery', suggestion);
+                    setShowSuggestions(false);
+                  }}
+                >
+                  {suggestion}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Primary Filters Row */}

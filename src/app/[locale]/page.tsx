@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Card, CardContent } from '@/components/ui/card';
 import { Handshake, CircleCheckBig, Users, Sparkles, Video } from 'lucide-react';
-import { IslamicContentCard } from '@/components/shared/islamic-content-card';
+import { IslamicContentCarousel } from '@/components/home/islamic-content-carousel';
 import { NikahSimplifiedCard } from '@/components/shared/nikah-simplified-card';
 import MainLayout from '@/components/layout/main-layout';
 import { AppTour } from '@/components/shared/app-tour';
@@ -73,8 +73,24 @@ export default function Home() {
             </Card>
           </section>
 
-          {/* Islamic Content */}
-          <IslamicContentCard />
+          {/* Islamic Content Carousel */}
+          <section>
+            <div className="text-center mb-8">
+              <h2 className="font-headline text-3xl md:text-4xl font-semibold">
+                Islamic Wisdom
+              </h2>
+              <p className="text-muted-foreground mt-2 max-w-2xl mx-auto">
+                Guidance from the Quran and Sunnah on marriage and relationships
+              </p>
+            </div>
+            <IslamicContentCarousel 
+              autoPlay={true}
+              autoPlayInterval={10000}
+              showControls={true}
+              showIndicators={true}
+              className="max-w-4xl mx-auto"
+            />
+          </section>
           
           <Separator />
 

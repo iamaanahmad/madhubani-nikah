@@ -11,16 +11,17 @@ import {
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { Loader2, Sparkles } from 'lucide-react';
 import { explainMatch } from '@/ai/flows/smart-match-explanation';
-import { currentUser } from '@/lib/data';
-import type { UserProfile } from '@/lib/types';
+import { ProfileService, type Profile } from '@/lib/services/profile.service';
+import { useAuth } from '@/components/providers/auth-provider';
 
 interface SmartMatchExplainerProps {
-  profile: UserProfile;
+  profile: Profile;
 }
 
 export function SmartMatchExplainer({
   profile,
 }: SmartMatchExplainerProps) {
+  const { user } = useAuth();
   const [isOpen, setIsOpen] = React.useState(false);
   const [explanation, setExplanation] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(false);
@@ -28,12 +29,19 @@ export function SmartMatchExplainer({
 
   const handleOpenChange = async (open: boolean) => {
     setIsOpen(open);
-    if (open && !explanation) {
+    if (open && !explanation && user) {
       setIsLoading(true);
       setError('');
       try {
+        // Get current user's profile
+        const currentUserProfile = await ProfileService.getProfile(user.$id);
+        if (!currentUserProfile) {
+          setError('Could not load your profile. Please try again.');
+          return;
+        }
+
         // Stringify profiles for the AI prompt
-        const userProfileStr = JSON.stringify(currentUser, null, 2);
+        const userProfileStr = JSON.stringify(currentUserProfile, null, 2);
         const matchProfileStr = JSON.stringify(profile, null, 2);
 
         const result = await explainMatch({
