@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@i18n/navigation';
 import { useTranslations } from 'next-intl';
 import { Logo } from '@/components/shared/logo';
 import { AccessibilityToolbar } from '@/components/shared/accessibility-toolbar';
@@ -15,7 +15,7 @@ export function AppFooter() {
                 </div>
                 <div className="flex justify-center gap-4">
                     <Link href="/about" className="text-sm hover:text-primary">About Us</Link>
-                    <Link href="/help" className="text-sm hover:text-primary">Contact</Link>
+                    <Link href="/help" className="text-sm hover:text-primary">Help</Link>
                     <Link href="/privacy" className="text-sm hover:text-primary">Privacy Policy</Link>
                 </div>
                 <div className="flex justify-center md:justify-end">

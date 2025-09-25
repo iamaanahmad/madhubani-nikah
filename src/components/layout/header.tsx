@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -85,13 +84,6 @@ export function AppHeader() {
             <DropdownMenuItem onSelect={() => handleLanguageChange('ur')}>اردو</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        
-        <Button variant="outline" size="icon" asChild className="hidden md:inline-flex">
-            <Link href="/help">
-              <LifeBuoy className="h-[1.2rem] w-[1.2rem]" />
-              <span className="sr-only">Help & Support</span>
-            </Link>
-        </Button>
         
         {loggedIn ? (
           <DropdownMenu>
